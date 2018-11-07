@@ -424,11 +424,11 @@ public class Main extends JFrame {
         btnHelp.setBackground(new Color(102, 102, 102));
         btnClose.setBackground(new Color(102, 102, 102));
 
+        extractor.setVisible(false);
         smartExtractor.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
         settings.setVisible(false);
-        extractor.setVisible(false);
         home.setVisible(true);
     }
     private void btnExtractorActionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,8 +444,7 @@ public class Main extends JFrame {
         btnHelp.setBackground(new Color(102, 102, 102));
         btnClose.setBackground(new Color(102, 102, 102));
 
-
-
+        home.setVisible(false);
         smartExtractor.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
@@ -466,7 +465,7 @@ public class Main extends JFrame {
         btnAbout.setBackground(new Color(102, 102, 102));
         btnClose.setBackground(new Color(102, 102, 102));
 
-
+        home.setVisible(false);
         extractor.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
@@ -486,7 +485,7 @@ public class Main extends JFrame {
         btnHelp.setBackground(new Color(102, 102, 102));
         btnClose.setBackground(new Color(102, 102, 102));
 
-
+        home.setVisible(false);
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
         about.setVisible(false);
@@ -522,6 +521,7 @@ public class Main extends JFrame {
         btnHelp.setBackground(new Color(102, 102, 102));
         btnClose.setBackground(new Color(102, 102, 102));
 
+        home.setVisible(false);
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
         about.setVisible(false);
@@ -541,6 +541,7 @@ public class Main extends JFrame {
         btnHelp.setBackground(new Color(102, 102, 102));
         btnClose.setBackground(new Color(102, 102, 102));
 
+        home.setVisible(false);
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
         themes.setVisible(false);
