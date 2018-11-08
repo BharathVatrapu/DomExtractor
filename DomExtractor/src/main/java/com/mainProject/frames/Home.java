@@ -1,6 +1,7 @@
 package com.mainProject.frames;
 
 
+import com.mainProject.utils.GlobalConstants;
 import javax.swing.*;
 
 /**
@@ -24,7 +25,7 @@ public class Home extends javax.swing.JPanel {
         imgHome = new javax.swing.JLabel();
 
 
-        panelExtractor.setBackground(new java.awt.Color(204, 255, 255));
+        panelExtractor.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelExtractor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
         imgHome.setIcon(new ImageIcon(getClass().getResource("/img/DomExtractor_Home.gif")));

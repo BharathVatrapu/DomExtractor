@@ -1,16 +1,25 @@
 package com.mainProject.frames;
 
+import com.mainProject.utils.Generic;
+import com.mainProject.utils.GlobalConstants;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+
+import static com.sun.deploy.uitoolkit.ToolkitStore.dispose;
+
 /**
  *
  * @author BhaRatH
  */
 public class Themes extends javax.swing.JPanel {
 
+
     /**
      * Creates new form Extractor
      */
     public Themes() {
         initComponents();
+        initload();
     }
 
     /**
@@ -35,13 +44,13 @@ public class Themes extends javax.swing.JPanel {
         imgSide = new javax.swing.JLabel();
         btnSelect = new javax.swing.JButton();
 
-        panelExtractor.setBackground(new java.awt.Color(204, 255, 255));
+        panelExtractor.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelExtractor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
         txtTheme.setFont(new java.awt.Font("Tahoma", 3, 14));
         txtTheme.setText("Theme: ");
 
-        cbSelectTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSelectTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NeonBlue","SlateBlue", "BitterSweet", "Supernova", "LaserLemon","MintGreen","PersianGreen","FuchiaPink" }));
 
         panelBody.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Body", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -76,8 +85,18 @@ public class Themes extends javax.swing.JPanel {
         );
 
         btnApply.setText("Apply");
+        btnApply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyActionPerformed(evt);
+            }
+        });
 
         btnDefault.setText("Default");
+        btnDefault.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDefaultActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -96,6 +115,11 @@ public class Themes extends javax.swing.JPanel {
         btnSelect.setForeground(new java.awt.Color(102, 204, 0));
         btnSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Checked_32px.png")));
         btnSelect.setText("Select");
+        btnSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelExtractorLayout = new javax.swing.GroupLayout(panelExtractor);
         panelExtractor.setLayout(panelExtractorLayout);
@@ -157,7 +181,68 @@ public class Themes extends javax.swing.JPanel {
         );
     }
 
+    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {
 
+        setColors(cbSelectTheme.getSelectedItem().toString());
+
+
+    }
+
+    public void setColors(String Theme){
+        switch (Theme){
+
+            case "SlateBlue":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.SLATE_BLUE[0],GlobalConstants.SLATE_BLUE[1],GlobalConstants.SLATE_BLUE[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.SLATE_BLUE[3],GlobalConstants.SLATE_BLUE[4],GlobalConstants.SLATE_BLUE[5]));
+                break;
+            case "BitterSweet":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.BitterSweet[0],GlobalConstants.BitterSweet[1],GlobalConstants.BitterSweet[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.BitterSweet[3],GlobalConstants.BitterSweet[4],GlobalConstants.BitterSweet[5]));
+                break;
+            case "Supernova":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.Supernova[0],GlobalConstants.Supernova[1],GlobalConstants.Supernova[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.Supernova[3],GlobalConstants.Supernova[4],GlobalConstants.Supernova[5]));
+                break;
+            case "LaserLemon":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.LaserLemon[0],GlobalConstants.LaserLemon[1],GlobalConstants.LaserLemon[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.LaserLemon[3],GlobalConstants.LaserLemon[4],GlobalConstants.LaserLemon[5]));
+                break;
+            case "MintGreen":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.MintGreen[0],GlobalConstants.MintGreen[1],GlobalConstants.MintGreen[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.MintGreen[3],GlobalConstants.MintGreen[4],GlobalConstants.MintGreen[5]));
+                break;
+            case "PersianGreen":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.PersianGreen[0],GlobalConstants.PersianGreen[1],GlobalConstants.PersianGreen[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.PersianGreen[3],GlobalConstants.PersianGreen[4],GlobalConstants.PersianGreen[5]));
+                break;
+            case "NeonBlue":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.NeonBlue[0],GlobalConstants.NeonBlue[1],GlobalConstants.NeonBlue[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.NeonBlue[3],GlobalConstants.NeonBlue[4],GlobalConstants.NeonBlue[5]));
+                break;
+            case "FuchiaPink":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.FuchiaPink[0],GlobalConstants.FuchiaPink[1],GlobalConstants.FuchiaPink[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.FuchiaPink[3],GlobalConstants.FuchiaPink[4],GlobalConstants.FuchiaPink[5]));
+                break;
+        }
+    }
+
+    public void btnApplyActionPerformed(java.awt.event.ActionEvent evt){
+        Generic.writeText(cbSelectTheme.getSelectedItem().toString(),GlobalConstants.DomExtractor_Config_Theme_file,false);
+        JOptionPane.showMessageDialog(null, "Applied Theme..Restart App for effect", "Info" , JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    public void initload(){
+        cbSelectTheme.setSelectedItem(GlobalConstants.THEME);
+        setColors(GlobalConstants.THEME);
+    }
+    public void btnDefaultActionPerformed(java.awt.event.ActionEvent evt){
+        cbSelectTheme.setSelectedItem(GlobalConstants.DEFAULT_THEME);
+        setColors(GlobalConstants.DEFAULT_THEME);
+        Generic.writeText(GlobalConstants.DEFAULT_THEME,GlobalConstants.DomExtractor_Config_Theme_file,false);
+        JOptionPane.showMessageDialog(null, "Applied Theme..Restart App for effect", "Info" , JOptionPane.INFORMATION_MESSAGE);
+
+    }
     // Variables declaration - do not modify
     private javax.swing.JButton btnApply;
     private javax.swing.JButton btnBodyColor;

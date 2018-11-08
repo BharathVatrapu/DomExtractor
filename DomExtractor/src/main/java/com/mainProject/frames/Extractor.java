@@ -1,5 +1,7 @@
 package com.mainProject.frames;
 
+import com.mainProject.utils.GlobalConstants;
+
 /**
  *
  * @author BhaRatH
@@ -44,24 +46,24 @@ public class Extractor extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
 
-        panelExtractor.setBackground(new java.awt.Color(204, 255, 255));
+        panelExtractor.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelExtractor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
         txtFormat.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtFormat.setText("Format: ");
 
-        rbUrl.setBackground(new java.awt.Color(204, 255, 255));
+        rbUrl.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbUrl.setText("Url");
 
-        rbPath.setBackground(new java.awt.Color(204, 255, 255));
+        rbPath.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbPath.setText("Path");
 
-        btnSelectFolder.setBackground(new java.awt.Color(204, 255, 255));
+        btnSelectFolder.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnSelectFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Opened_Folder_20px.png")));
         btnSelectFolder.setBorder(null);
         btnSelectFolder.setBorderPainted(false);
 
-        btnAdd.setBackground(new java.awt.Color(204, 255, 255));
+        btnAdd.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnAdd.setFont(new java.awt.Font("Tahoma", 1, 11));
         btnAdd.setForeground(new java.awt.Color(41, 126, 183));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add_Row_32px.png")));
@@ -71,44 +73,44 @@ public class Extractor extends javax.swing.JPanel {
         txtCodeType.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtCodeType.setText("Code Type: ");
 
-        cmCodeType.setBackground(new java.awt.Color(204, 255, 255));
+        cmCodeType.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cmCodeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pom", "property" }));
 
         txtExample.setText("Ex.");
 
-        txtAreaExample.setBackground(new java.awt.Color(204, 255, 255));
+        txtAreaExample.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         txtAreaExample.setColumns(20);
         txtAreaExample.setRows(5);
         jScrollPane1.setViewportView(txtAreaExample);
 
-        panelObjects.setBackground(new java.awt.Color(204, 255, 255));
+        panelObjects.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelObjects.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Object Controls", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255)));
 
-        cbLink.setBackground(new java.awt.Color(204, 255, 255));
+        cbLink.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbLink.setText("Link");
 
-        cbButton.setBackground(new java.awt.Color(204, 255, 255));
+        cbButton.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbButton.setText("Button");
 
-        cbList.setBackground(new java.awt.Color(204, 255, 255));
+        cbList.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbList.setText("List");
 
-        cbEditBox.setBackground(new java.awt.Color(204, 255, 255));
+        cbEditBox.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbEditBox.setText("Edit Box");
 
-        cbComboBox.setBackground(new java.awt.Color(204, 255, 255));
+        cbComboBox.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbComboBox.setText("Combo Box");
 
-        cbRadioButton.setBackground(new java.awt.Color(204, 255, 255));
+        cbRadioButton.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbRadioButton.setText("Radio Button");
 
-        cbCheckBox.setBackground(new java.awt.Color(204, 255, 255));
+        cbCheckBox.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbCheckBox.setText("Check Box");
 
-        cbText.setBackground(new java.awt.Color(204, 255, 255));
+        cbText.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbText.setText("Text");
 
-        cbImage.setBackground(new java.awt.Color(204, 255, 255));
+        cbImage.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbImage.setText("Image");
         cbImage.setToolTipText("");
 
@@ -161,25 +163,25 @@ public class Extractor extends javax.swing.JPanel {
                                 .addContainerGap())
         );
 
-        listFormat.setBackground(new java.awt.Color(204, 255, 255));
+        listFormat.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         jScrollPane2.setViewportView(listFormat);
 
-        btnGenerate.setBackground(new java.awt.Color(204, 255, 255));
+        btnGenerate.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Services_32px.png")));
         btnGenerate.setText("Genarate");
 
-        btnClear.setBackground(new java.awt.Color(204, 255, 255));
+        btnClear.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Broom_32px.png")));
         btnClear.setText("Clear");
 
-        btnEdit.setBackground(new java.awt.Color(204, 255, 255));
+        btnEdit.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnEdit.setFont(new java.awt.Font("Tahoma", 1, 11));
         btnEdit.setForeground(new java.awt.Color(41, 126, 183));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Edit_Row_32px.png")));
         btnEdit.setBorder(null);
         btnEdit.setBorderPainted(false);
 
-        btnRemove.setBackground(new java.awt.Color(204, 255, 255));
+        btnRemove.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnRemove.setFont(new java.awt.Font("Tahoma", 1, 11));
         btnRemove.setForeground(new java.awt.Color(41, 126, 183));
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_Row_32px.png")));

@@ -20,6 +20,40 @@ public class Generic {
         return DateNow;
     }
 
+    public static DefaultListModel readTextFile(String filePath){
+        DefaultListModel listModel= new DefaultListModel();
+        String[] readlines=null;
+        try {
+            listModel.removeAllElements();
+            File file = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String st;
+
+            while ((st = br.readLine()) != null) {
+                listModel.addElement(st);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listModel;
+    }
+    public static String readText(String filePath){
+        String st=null;
+        try {
+            File file = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            while ((st = br.readLine()) != null) {
+
+                return st;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("read::"+st);
+        return st;
+    }
     public static boolean createFolder(String dirPath){
         boolean fvar = false;
         try {
@@ -153,6 +187,88 @@ public class Generic {
             pw.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+
+    }
+
+    public static void getTheme(){
+
+
+
+        switch (GlobalConstants.THEME){
+            case "NeonBlue":
+                GlobalConstants.header_Color_r= GlobalConstants.NeonBlue[0];
+                GlobalConstants.header_Color_g= GlobalConstants.NeonBlue[1];
+                GlobalConstants.header_Color_b= GlobalConstants.NeonBlue[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.NeonBlue[3];
+                GlobalConstants.body_Color_g= GlobalConstants.NeonBlue[4];
+                GlobalConstants.body_Color_b= GlobalConstants.NeonBlue[5];
+                break;
+            case "SLATE_BLUE":
+                GlobalConstants.header_Color_r= GlobalConstants.SLATE_BLUE[0];
+                GlobalConstants.header_Color_g= GlobalConstants.SLATE_BLUE[1];
+                GlobalConstants.header_Color_b= GlobalConstants.SLATE_BLUE[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.SLATE_BLUE[3];
+                GlobalConstants.body_Color_g= GlobalConstants.SLATE_BLUE[4];
+                GlobalConstants.body_Color_b= GlobalConstants.SLATE_BLUE[5];
+                break;
+            case "BitterSweet":
+                GlobalConstants.header_Color_r= GlobalConstants.BitterSweet[0];
+                GlobalConstants.header_Color_g= GlobalConstants.BitterSweet[1];
+                GlobalConstants.header_Color_b= GlobalConstants.BitterSweet[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.BitterSweet[3];
+                GlobalConstants.body_Color_g= GlobalConstants.BitterSweet[4];
+                GlobalConstants.body_Color_b= GlobalConstants.BitterSweet[5];
+                break;
+            case "Supernova":
+                GlobalConstants.header_Color_r= GlobalConstants.Supernova[0];
+                GlobalConstants.header_Color_g= GlobalConstants.Supernova[1];
+                GlobalConstants.header_Color_b= GlobalConstants.Supernova[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.Supernova[3];
+                GlobalConstants.body_Color_g= GlobalConstants.Supernova[4];
+                GlobalConstants.body_Color_b= GlobalConstants.Supernova[5];
+                break;
+            case "LaserLemon":
+                GlobalConstants.header_Color_r= GlobalConstants.LaserLemon[0];
+                GlobalConstants.header_Color_g= GlobalConstants.LaserLemon[1];
+                GlobalConstants.header_Color_b= GlobalConstants.LaserLemon[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.LaserLemon[3];
+                GlobalConstants.body_Color_g= GlobalConstants.LaserLemon[4];
+                GlobalConstants.body_Color_b= GlobalConstants.LaserLemon[5];
+                break;
+            case "MintGreen":
+                GlobalConstants.header_Color_r= GlobalConstants.MintGreen[0];
+                GlobalConstants.header_Color_g= GlobalConstants.MintGreen[1];
+                GlobalConstants.header_Color_b= GlobalConstants.MintGreen[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.MintGreen[3];
+                GlobalConstants.body_Color_g= GlobalConstants.MintGreen[4];
+                GlobalConstants.body_Color_b= GlobalConstants.MintGreen[5];
+                break;
+            case "PersianGreen":
+                GlobalConstants.header_Color_r= GlobalConstants.PersianGreen[0];
+                GlobalConstants.header_Color_g= GlobalConstants.PersianGreen[1];
+                GlobalConstants.header_Color_b= GlobalConstants.PersianGreen[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.PersianGreen[3];
+                GlobalConstants.body_Color_g= GlobalConstants.PersianGreen[4];
+                GlobalConstants.body_Color_b= GlobalConstants.PersianGreen[5];
+                break;
+            case "FuchiaPink":
+                GlobalConstants.header_Color_r= GlobalConstants.FuchiaPink[0];
+                GlobalConstants.header_Color_g= GlobalConstants.FuchiaPink[1];
+                GlobalConstants.header_Color_b= GlobalConstants.FuchiaPink[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.FuchiaPink[3];
+                GlobalConstants.body_Color_g= GlobalConstants.FuchiaPink[4];
+                GlobalConstants.body_Color_b= GlobalConstants.FuchiaPink[5];
+                break;
+
         }
 
     }

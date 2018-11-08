@@ -1,5 +1,6 @@
 package com.mainProject.frames;
 
+import com.mainProject.utils.GlobalConstants;
 import javax.swing.*;
 
 
@@ -37,19 +38,19 @@ import javax.swing.*;
             //setLocationRelativeTo(null);
             setUndecorated(true);
 
-        panelHelp.setBackground(new java.awt.Color(204, 255, 255));
+        panelHelp.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         imgUserguideWord.setIcon(new ImageIcon(getClass().getResource("/icons/Microsoft_Word_100px.png")));
 
         txtUserGuide.setText("Dom Extractor User Guide");
 
-        btnMinimize.setBackground(new java.awt.Color(204, 255, 255));
+        btnMinimize.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnMinimize.setIcon(new ImageIcon(getClass().getResource("/icons/Subtract_20px.png")));
         btnMinimize.setBorder(null);
         btnMinimize.setBorderPainted(false);
         btnMinimize.setFocusPainted(false);
 
-        btnClose.setBackground(new java.awt.Color(204, 255, 255));
+        btnClose.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnClose.setIcon(new ImageIcon(getClass().getResource("/icons/Delete_20px.png")));
         btnClose.setBorder(null);
         btnClose.setBorderPainted(false);

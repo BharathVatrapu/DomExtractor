@@ -1,6 +1,8 @@
 package com.mainProject.frames;
 
 
+import com.mainProject.utils.GlobalConstants;
+
 /**
  *
  * @author BhaRatH
@@ -24,7 +26,7 @@ public class ViewFiles extends javax.swing.JPanel {
         btnOpen = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
-        panelViewFiles.setBackground(new java.awt.Color(204, 255, 255));
+        panelViewFiles.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelViewFiles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
         tblFiles.setModel(new javax.swing.table.DefaultTableModel(

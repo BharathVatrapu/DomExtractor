@@ -1,5 +1,7 @@
 package com.mainProject.frames;
 
+import com.mainProject.utils.GlobalConstants;
+
 /**
  *
  * @author BhaRatH
@@ -25,7 +27,7 @@ public class About extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaAbout = new javax.swing.JTextArea();
 
-        panelExtractor.setBackground(new java.awt.Color(204, 255, 255));
+        panelExtractor.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelExtractor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
         javax.swing.GroupLayout panelImageLayout = new javax.swing.GroupLayout(panelImage);

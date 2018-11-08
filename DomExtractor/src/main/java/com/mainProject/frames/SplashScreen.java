@@ -19,6 +19,7 @@ public class SplashScreen extends JFrame {
     private static JProgressBar pbar;
     Thread t = null;
 
+
     public SplashScreen() {
         super("Splash");
         setSize(580, 310);
@@ -63,30 +64,42 @@ public class SplashScreen extends JFrame {
         Thread t=Thread.currentThread();
         t.sleep(10000);
         ss.dispose();
-        if(setupXtractor()){
-         //   new XpathXtractor().setVisible(true);
+        if(setupExtractor()){
+            new Main().setVisible(true);
+
         } else{
             JOptionPane.showMessageDialog(null, "Setup Incomplete", "Terminating.. " , JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
 
-    public static boolean setupXtractor(){
+    public static boolean setupExtractor(){
         boolean flag=true;
-        if(!Generic.createFolder(GlobalConstants.Xtractor_Home_folder)){
+        if(!Generic.createFolder(GlobalConstants.DomExtractor_Home_folder)){
             flag=false;
         }
-        if(!Generic.createFolder(GlobalConstants.Xtractor_pom_folder)){
+        if(!Generic.createFolder(GlobalConstants.DomExtractor_Config_folder)){
+            flag=false;
+        }
+        if(!Generic.createFolder(GlobalConstants.DomExtractor_Extractor_folder)){
             flag=false;
         }
 
-        if(!Generic.createFile(GlobalConstants.Xtractor_Url_file)){
+        if(!Generic.createFile(GlobalConstants.DomExtractor_Config_Settings_file)){
             flag=false;
         }
-        if(!Generic.createFile(GlobalConstants.Xtractor_path_file)){
+        if(!Generic.createFile(GlobalConstants.DomExtractor_Config_Theme_file)){
+            flag=false;
+        }
+        if(!Generic.createFile(GlobalConstants.DomExtractor_Extractor_path_file)){
+            flag=false;
+        }
+        if(!Generic.createFile(GlobalConstants.DomExtractor_Extractor_url_file)){
             flag=false;
         }
         return flag;
     }
+
+
 
 }

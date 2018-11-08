@@ -1,17 +1,25 @@
 package com.mainProject.frames;
 
 
+import com.mainProject.utils.Generic;
+import com.mainProject.utils.GlobalConstants;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BhaRatH
  */
 public class Settings extends javax.swing.JPanel {
 
+    ButtonGroup bgBrowsers = new ButtonGroup();
+    StringBuilder sb = new StringBuilder();
     /**
      * Creates new form Extractor
      */
     public Settings() {
         initComponents();
+        initLoad();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +45,7 @@ public class Settings extends javax.swing.JPanel {
         imgEdge = new javax.swing.JLabel();
         rbEdge = new javax.swing.JRadioButton();
 
-        panelExtractor.setBackground(new java.awt.Color(204, 255, 255));
+        panelExtractor.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelExtractor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
         javax.swing.GroupLayout panelImageLayout = new javax.swing.GroupLayout(panelImage);
@@ -54,18 +62,28 @@ public class Settings extends javax.swing.JPanel {
         txtFolderPath.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtFolderPath.setText("Set Folder Path:");
 
-        btnFolderSelect.setBackground(new java.awt.Color(204, 255, 255));
+        btnFolderSelect.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnFolderSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Opened_Folder_20px.png")));
         btnFolderSelect.setBorder(null);
         btnFolderSelect.setBorderPainted(false);
+        btnFolderSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFolderSelectActionPerformed(evt);
+            }
+        });
 
         txtBrowserdriverPath.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtBrowserdriverPath.setText("Browser drivers Path:");
 
-        btnSelectDriversFolder.setBackground(new java.awt.Color(204, 255, 255));
+        btnSelectDriversFolder.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnSelectDriversFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Opened_Folder_20px.png")));
         btnSelectDriversFolder.setBorder(null);
         btnSelectDriversFolder.setBorderPainted(false);
+        btnSelectDriversFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectDriversFolderActionPerformed(evt);
+            }
+        });
 
         txtDefaultBrowser.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtDefaultBrowser.setText("Select default Browser:");
@@ -74,26 +92,37 @@ public class Settings extends javax.swing.JPanel {
         btnSave.setForeground(new java.awt.Color(51, 152, 219));
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_32px.png")));
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        rbChrome.setBackground(new java.awt.Color(204, 255, 255));
+        rbChrome.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbChrome.setText("Chrome");
 
         imgChrome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Chrome_30px.png")));
 
         imgFirefox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Firefox_30px.png")));
 
-        rbFirefox.setBackground(new java.awt.Color(204, 255, 255));
+        rbFirefox.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbFirefox.setText("Firefox");
 
         imgIE11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Internet_Explorer_30px.png")));
 
-        rbIE11.setBackground(new java.awt.Color(204, 255, 255));
+        rbIE11.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbIE11.setText("IE11");
 
         imgEdge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Microsoft_Edge_30px.png")));
 
-        rbEdge.setBackground(new java.awt.Color(204, 255, 255));
+        rbEdge.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbEdge.setText("Edge");
+
+        bgBrowsers.add(rbChrome);
+        bgBrowsers.add(rbFirefox);
+        bgBrowsers.add(rbEdge);
+        bgBrowsers.add(rbIE11);
+
 
         javax.swing.GroupLayout panelExtractorLayout = new javax.swing.GroupLayout(panelExtractor);
         panelExtractor.setLayout(panelExtractorLayout);
@@ -184,7 +213,74 @@ public class Settings extends javax.swing.JPanel {
         );
     }
 
+    private void btnFolderSelectActionPerformed(java.awt.event.ActionEvent evt) {
+        edtSelectFolder.setText(Generic.choosefolderPath());
+    }
+    private void btnSelectDriversFolderActionPerformed(java.awt.event.ActionEvent evt) {
+        edtDriverPath.setText(Generic.choosefolderPath());
+    }
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {
+        boolean flag=true;
+         if(edtSelectFolder.getText().isEmpty()){
+             flag=false;
+             JOptionPane.showMessageDialog(null, "Select Folder Path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+         } else{
 
+             sb.append(edtSelectFolder.getText());
+             sb.append(System.lineSeparator());
+         }
+        if(edtDriverPath.getText().isEmpty()){
+            flag=false;
+            JOptionPane.showMessageDialog(null, "Select Drivers folder Path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+        } else{
+            sb.append(edtDriverPath.getText());
+            sb.append(System.lineSeparator());
+        }
+        sb.append(getBrowser());
+        String everything = sb.toString();
+         if(flag){
+             Generic.writeText(everything,GlobalConstants.DomExtractor_Config_Settings_file,false);
+             JOptionPane.showMessageDialog(null, "Done", "Info" , JOptionPane.INFORMATION_MESSAGE);
+         }
+    }
+
+
+    public void initLoad(){
+        if(GlobalConstants.SETTINGS_FOLDER_PATH != null){
+            edtSelectFolder.setText(GlobalConstants.SETTINGS_FOLDER_PATH);
+            edtDriverPath.setText(GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH);
+            setBrowser(GlobalConstants.SETTINGS_DEFAULT_BROWSER);
+        } else {
+            setBrowser("Chrome");
+        }
+    }
+    public void setBrowser(String browser){
+        switch (browser){
+            case "Chrome":
+                rbChrome.setSelected(true);
+                break;
+            case "Firefox":
+                rbFirefox.setSelected(true);
+                break;
+            case "IE11":
+                rbIE11.setSelected(true);
+                break;
+            case "Edge":
+                rbEdge.setSelected(true);
+                break;
+        }
+    }
+    public String getBrowser(){
+        if(rbEdge.isSelected()){
+            return rbEdge.getText();
+        } else if(rbIE11.isSelected()){
+            return rbIE11.getText();
+        } else if (rbFirefox.isSelected()){
+            return rbFirefox.getText();
+        } else{
+            return rbChrome.getText();
+        }
+    }
     // Variables declaration - do not modify
     private javax.swing.JButton btnFolderSelect;
     private javax.swing.JButton btnSave;

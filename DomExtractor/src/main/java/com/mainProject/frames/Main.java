@@ -2,27 +2,27 @@ package com.mainProject.frames;
 
 import com.mainProject.utils.Generic;
 
+import com.mainProject.utils.GlobalConstants;
 import javax.swing.*;
 import java.awt.*;
 
 /**
  *
- * @author bvatrapu
+ * @author Bharath Kumar Reddy Vatrapu
  */
 public class Main extends JFrame {
 
+    DefaultListModel listModel= new DefaultListModel();
     GridBagLayout gridBagLayout = new GridBagLayout();
+
+    static Home home;
     static Extractor extractor;
     static SmartExtractor smartExtractor;
-    static Themes themes;
-    static About about;
-    static Settings settings;
     static ViewFiles viewFiles;
-    static Home home;
+    static Themes themes;
+    static Settings settings;
+    static About about;
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Create and display the form */
         EventQueue.invokeLater(new Runnable() {
@@ -32,23 +32,24 @@ public class Main extends JFrame {
         });
     }
 
-    /**
-     * Creates new form ObjectExtractor
-     */
 
     public Main() {
+        loadDefaultData();
         initComponents();
+        home = new Home();
         extractor = new Extractor();
         smartExtractor = new SmartExtractor();
-        themes = new Themes();
-        about = new About();
-        settings = new Settings();
         viewFiles = new ViewFiles();
-        home = new Home();
+        themes = new Themes();
+        settings = new Settings();
+        about = new About();
 
         panelBody.setLayout(gridBagLayout);
         GridBagConstraints c = new GridBagConstraints();
 
+        c.gridx = 0;
+        c.gridy = 0;
+        panelBody.add(home,c);
         c.gridx = 0;
         c.gridy = 0;
         panelBody.add(extractor,c);
@@ -57,27 +58,27 @@ public class Main extends JFrame {
         panelBody.add(smartExtractor,c);
         c.gridx = 0;
         c.gridy = 0;
-        panelBody.add(themes,c);
+        panelBody.add(viewFiles,c);
         c.gridx = 0;
         c.gridy = 0;
-        panelBody.add(about,c);
+        panelBody.add(themes,c);
         c.gridx = 0;
         c.gridy = 0;
         panelBody.add(settings,c);
         c.gridx = 0;
         c.gridy = 0;
-        panelBody.add(viewFiles,c);
-        c.gridx = 0;
-        c.gridy = 0;
-        panelBody.add(home,c);
+        panelBody.add(about,c);
 
+        home.setVisible(false);
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
+        settings.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
-        settings.setVisible(false);
-        viewFiles.setVisible(false);
-        home.setVisible(false);
+
+        initLoading();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -109,15 +110,15 @@ public class Main extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //setLocationRelativeTo(null);
         setUndecorated(true);
 
-        panelHeader.setBackground(new Color(204, 204, 255));
+        panelHeader.setBackground(new Color(GlobalConstants.header_Color_r,GlobalConstants.header_Color_g,GlobalConstants.header_Color_b));
 
         imgLogo.setIcon(new ImageIcon(getClass().getResource("/icons/Source_Code_48px.png")));
 
-        btnClose.setBackground(new Color(204, 204, 255));
+        btnClose.setBackground(new Color(GlobalConstants.header_Color_r,GlobalConstants.header_Color_g,GlobalConstants.header_Color_b));
         btnClose.setIcon(new ImageIcon(getClass().getResource("/icons/Delete_20px.png")));
+
         btnClose.setBorder(null);
         btnClose.setBorderPainted(false);
         btnClose.setFocusPainted(false);
@@ -126,8 +127,8 @@ public class Main extends JFrame {
                 btnClosesActionPerformed(evt);
             }
         });
-
-        btnMinimize.setBackground(new Color(204, 204, 255));
+        btnClose.setBackground(new Color(GlobalConstants.header_Color_r,GlobalConstants.header_Color_g,GlobalConstants.header_Color_b));
+        btnMinimize.setBackground(new Color(GlobalConstants.header_Color_r,GlobalConstants.header_Color_g,GlobalConstants.header_Color_b));
         btnMinimize.setIcon(new ImageIcon(getClass().getResource("/icons/Subtract_20px.png")));
         btnMinimize.setBorder(null);
         btnMinimize.setBorderPainted(false);
@@ -215,10 +216,11 @@ public class Main extends JFrame {
                                 .addGap(22, 22, 22))
         );
 
-        panelSide.setBackground(new Color(102, 102, 102));
+        panelSide.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
-        btnSettings.setBackground(new Color(102, 102, 102));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnSettings.setFont(new Font("Segoe UI", 1, 12));
+        btnSettings.setForeground(new Color(255, 255, 255));
         btnSettings.setIcon(new ImageIcon(getClass().getResource("/icons/Settings_26px.png")));
         btnSettings.setText("  Settings");
         btnSettings.setBorder(null);
@@ -230,8 +232,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnHome.setBackground(new Color(102, 102, 102));
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnHome.setFont(new Font("Segoe UI", 1, 12));
+        btnHome.setForeground(new Color(255, 255, 255));
         btnHome.setIcon(new ImageIcon(getClass().getResource("/icons/Home_26px.png")));
         btnHome.setText("   Home");
         btnHome.setBorder(null);
@@ -243,8 +246,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnExtractor.setBackground(new Color(102, 102, 102));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnExtractor.setFont(new Font("Segoe UI", 1, 12));
+        btnExtractor.setForeground(new Color(255, 255, 255));
         btnExtractor.setIcon(new ImageIcon(getClass().getResource("/icons/Property_Script_26px.png")));
         btnExtractor.setText("Extractor");
         btnExtractor.setBorder(null);
@@ -256,8 +260,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnTheme.setBackground(new Color(102, 102, 102));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnTheme.setFont(new Font("Segoe UI", 1, 12));
+        btnTheme.setForeground(new Color(255, 255, 255));
         btnTheme.setIcon(new ImageIcon(getClass().getResource("/icons/Paint_Palette_26px.png")));
         btnTheme.setText("Theme");
         btnTheme.setBorder(null);
@@ -269,8 +274,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnHelp.setBackground(new Color(102, 102, 102));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnHelp.setFont(new Font("Segoe UI", 1, 12));
+        btnHelp.setForeground(new Color(255, 255, 255));
         btnHelp.setIcon(new ImageIcon(getClass().getResource("/icons/Help_26px.png")));
         btnHelp.setText("Help");
         btnHelp.setBorder(null);
@@ -282,8 +288,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnSideClose.setBackground(new Color(102, 102, 102));
+        btnSideClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnSideClose.setFont(new Font("Segoe UI", 1, 12));
+        btnSideClose.setForeground(new Color(255, 255, 255));
         btnSideClose.setIcon(new ImageIcon(getClass().getResource("/icons/Shutdown_26px.png")));
         btnSideClose.setText("Close");
         btnSideClose.setBorder(null);
@@ -295,8 +302,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnSmartExtrator.setBackground(new Color(102, 102, 102));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnSmartExtrator.setFont(new Font("Segoe UI", 1, 12));
+        btnSmartExtrator.setForeground(new Color(255, 255, 255));
         btnSmartExtrator.setIcon(new ImageIcon(getClass().getResource("/icons/Pin_Pad_20px.png")));
         btnSmartExtrator.setText("Smart Extractor");
         btnSmartExtrator.setBorder(null);
@@ -308,8 +316,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnOpenFile.setBackground(new Color(102, 102, 102));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnOpenFile.setFont(new Font("Segoe UI", 1, 12));
+        btnOpenFile.setForeground(new Color(255, 255, 255));
         btnOpenFile.setIcon(new ImageIcon(getClass().getResource("/icons/Open_View_26px.png")));
         btnOpenFile.setText("View Files");
         btnOpenFile.setBorder(null);
@@ -321,8 +330,9 @@ public class Main extends JFrame {
             }
         });
 
-        btnAbout.setBackground(new Color(102, 102, 102));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnAbout.setFont(new Font("Segoe UI", 1, 12));
+        btnAbout.setForeground(new Color(255, 255, 255));
         btnAbout.setIcon(new ImageIcon(getClass().getResource("/icons/About_26px.png")));
         btnAbout.setText("About");
         btnAbout.setBorder(null);
@@ -412,40 +422,45 @@ public class Main extends JFrame {
         close();
     }
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {
-        btnHome.setBackground(new Color(204, 255, 255));
-        panelBody.setBackground(new Color(204, 255, 255));
+       home();
+    }
+    public void home(){
+        btnHome.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnSmartExtrator.setBackground(new Color(102, 102, 102));
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
         settings.setVisible(false);
         home.setVisible(true);
     }
     private void btnExtractorActionPerformed(java.awt.event.ActionEvent evt) {
-        btnExtractor.setBackground(new Color(204, 255, 255));
-        panelBody.setBackground(new Color(204, 255, 255));
+        btnExtractor.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnSmartExtrator.setBackground(new Color(102, 102, 102));
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
         home.setVisible(false);
         smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
         settings.setVisible(false);
@@ -453,112 +468,132 @@ public class Main extends JFrame {
 
     }
     private void btnSmartExtratorActionPerformed(java.awt.event.ActionEvent evt) {
-        btnSmartExtrator.setBackground(new Color(204, 255, 255));
-        panelBody.setBackground(new Color(204, 255, 255));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
         home.setVisible(false);
         extractor.setVisible(false);
+        viewFiles.setVisible(false);
         themes.setVisible(false);
         about.setVisible(false);
         settings.setVisible(false);
         smartExtractor.setVisible(true);
 
     }
-    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {
-        btnSettings.setBackground(new Color(204, 255, 255));
-        panelBody.setBackground(new Color(204, 255, 255));
-
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
-
-        home.setVisible(false);
-        extractor.setVisible(false);
-        smartExtractor.setVisible(false);
-        about.setVisible(false);
-        themes.setVisible(false);
-        settings.setVisible(true);
-
-    }
-
     private void btnOpenFileActionPerformed(java.awt.event.ActionEvent evt) {
-        btnOpenFile.setBackground(new Color(255, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
-        panelBody.setBackground(new Color(255, 102, 102));
+        btnOpenFile.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
-    }
-
-    private void btnThemeActionPerformed(java.awt.event.ActionEvent evt) {
-
-        btnTheme.setBackground(new Color(204, 255, 255));
-        panelBody.setBackground(new Color(204, 255, 255));
-
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnSmartExtrator.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
         home.setVisible(false);
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
+        themes.setVisible(false);
+        about.setVisible(false);
+        settings.setVisible(false);
+        viewFiles.setVisible(true);
+
+    }
+    private void btnThemeActionPerformed(java.awt.event.ActionEvent evt) {
+        btnTheme.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+
+        home.setVisible(false);
+        extractor.setVisible(false);
+        smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
         about.setVisible(false);
         settings.setVisible(false);
         themes.setVisible(true);
 
     }
-    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {
-        btnAbout.setBackground(new Color(204, 255, 255));
-        panelBody.setBackground(new Color(204, 255, 255));
+    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {
 
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
+        btnSettings();
+    }
+
+    public void btnSettings(){
+        btnSettings.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnAbout.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
         home.setVisible(false);
         extractor.setVisible(false);
         smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
+        themes.setVisible(false);
+        about.setVisible(false);
+        settings.setVisible(true);
+    }
+
+    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {
+        btnAbout.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+
+        home.setVisible(false);
+        extractor.setVisible(false);
+        smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
         themes.setVisible(false);
         settings.setVisible(false);
         about.setVisible(true);
 
     }
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {
-        btnHelp.setBackground(new Color(255, 102, 102));
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnSettings.setBackground(new Color(102, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
-        panelBody.setBackground(new Color(255, 102, 102));
+        panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+
+        btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnOpenFile.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnTheme.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+        btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
+
 
         new Help().setVisible(true);
     }
@@ -569,24 +604,33 @@ public class Main extends JFrame {
 
 
     public void initLoading(){
-        btnSettings.setBackground(new Color(255, 102, 102));
-        btnHome.setBackground(new Color(102, 102, 102));
-        btnExtractor.setBackground(new Color(102, 102, 102));
-        btnOpenFile.setBackground(new Color(102, 102, 102));
-        btnTheme.setBackground(new Color(102, 102, 102));
-        btnAbout.setBackground(new Color(102, 102, 102));
-        btnHelp.setBackground(new Color(102, 102, 102));
-        btnClose.setBackground(new Color(102, 102, 102));
-        panelBody.setBackground(new Color(255, 102, 102));
-
-        btnHelp.setEnabled(false);
+        if(GlobalConstants.SETTINGS_FOLDER_PATH==null){
+            btnSettings();
+        } else {
+            home();
+        }
     }
     public void close(){
         setVisible(false);
         dispose();
     }
 
+    public void loadDefaultData(){
+        listModel = Generic.readTextFile(GlobalConstants.DomExtractor_Config_Settings_file);
+        if(!listModel.isEmpty()) {
+            GlobalConstants.SETTINGS_FOLDER_PATH = listModel.get(0).toString();
+            GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH = listModel.get(1).toString();
+            GlobalConstants.SETTINGS_DEFAULT_BROWSER = listModel.get(2).toString();
+        }
+        if(Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file)==null) {
+            Generic.writeText("NeonBlue",GlobalConstants.DomExtractor_Config_Theme_file,false);
+            GlobalConstants.THEME = Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file);
+        } else{
+            GlobalConstants.THEME = Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file);
+        }
 
+        Generic.getTheme();
+    }
 
     // Variables declaration - do not modify
     private JButton btnAbout;
