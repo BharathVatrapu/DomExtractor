@@ -54,4 +54,13 @@ public class GlobalConstants {
 
     public static String DEFAULT_THEME="NeonBlue";
 
+    public static String Versio_Product = "DomExtractor 2.0";
+    public static String Version_Java=System.getProperty("java.version")+"_"+System.getProperty("java.vm.version");
+    public static String Version_JavaRuntime=System.getProperty("java.runtime.name");
+    public static String Version_OS=System.getProperty("os.name")+"_"+System.getProperty("os.version");
+    public static String user_name = System.getProperty("user.name");
+
+
+    public static String selected_URL=null;
+
 }

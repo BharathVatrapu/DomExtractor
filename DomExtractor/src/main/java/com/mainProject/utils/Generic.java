@@ -19,6 +19,16 @@ public class Generic {
         }
         return DateNow;
     }
+    public static String getDateTime()
+    {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy-kk-mm");
+        String DateNow = dateFormat.format(date);
+        return DateNow;
+
+    }
+
+
 
     public static DefaultListModel readTextFile(String filePath){
         DefaultListModel listModel= new DefaultListModel();
@@ -271,5 +281,25 @@ public class Generic {
 
         }
 
+    }
+
+    public static String pomEx(){
+        String xpath = "//div/a[text()='example.com']";
+        String findby = "@FindBy(how = How.XPATH, using = "+xpath+")";
+        String cachelookup  = "@CacheLookup";
+        String webelement = "public WebElement btnExample"+";";
+        String pom = findby + System.lineSeparator() + cachelookup + System.lineSeparator() + webelement;
+
+        return pom;
+    }
+    public static String propEx(){
+        String pom = "SignInPage.SignIn.Link = //div/a[text()='example.com']@@@xpath";
+        return pom;
+    }
+
+    public static File changeExtension(File f, String newExtension) {
+        int i = f.getName().lastIndexOf('.');
+        String name = f.getName().substring(0,i);
+        return new File(f.getParent() + "/" + name + newExtension);
     }
 }

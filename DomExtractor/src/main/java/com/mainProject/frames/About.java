@@ -43,7 +43,8 @@ public class About extends javax.swing.JPanel {
 
         txtAreaSystemDetails.setColumns(20);
         txtAreaSystemDetails.setRows(5);
-        txtAreaSystemDetails.setText("Product Version: NetBeans IDE 8.2 (Build 201609300101)\nUpdates: NetBeans IDE is updated to version NetBeans 8.2 Patch 2\nJava: 1.8.0_66; Java HotSpot(TM) Client VM 25.66-b17\nRuntime: Java(TM) SE Runtime Environment 1.8.0_66-b17\nSystem: Windows 10 version 10.0 running on x86; Cp1252; en_IN (nb)");
+        txtAreaSystemDetails.setText("Product Version: "+GlobalConstants.Versio_Product+"\nUser Name: "+GlobalConstants.user_name+"\nJava: "+GlobalConstants.Version_Java+"\nRuntime: "+GlobalConstants.Version_JavaRuntime+"\nSystem: "+GlobalConstants.Version_OS+"");
+        txtAreaSystemDetails.setEditable(false);
         jScrollPane1.setViewportView(txtAreaSystemDetails);
 
         txtAreaAbout.setColumns(20);

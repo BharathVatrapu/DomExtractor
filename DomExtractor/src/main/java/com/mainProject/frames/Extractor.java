@@ -1,6 +1,16 @@
 package com.mainProject.frames;
 
+import com.mainProject.utils.DomExtractor;
+import com.mainProject.utils.Generic;
 import com.mainProject.utils.GlobalConstants;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
 
 /**
  *
@@ -8,11 +18,16 @@ import com.mainProject.utils.GlobalConstants;
  */
 public class Extractor extends javax.swing.JPanel {
 
+    DefaultListModel  listModel= new DefaultListModel();
+    DefaultListModel  readText= new DefaultListModel();
+    ButtonGroup bgFormat = new ButtonGroup();
+
     /**
      * Creates new form Extractor
      */
     public Extractor() {
         initComponents();
+        initLoads();
     }
     @SuppressWarnings("unchecked")
     private void initComponents() {
@@ -57,11 +72,29 @@ public class Extractor extends javax.swing.JPanel {
 
         rbPath.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbPath.setText("Path");
+        bgFormat.add(rbUrl);
+        bgFormat.add(rbPath);
+
+        rbUrl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbUrlActionPerformed(evt);
+            }
+        });
+        rbPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPathActionPerformed(evt);
+            }
+        });
 
         btnSelectFolder.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnSelectFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Opened_Folder_20px.png")));
         btnSelectFolder.setBorder(null);
         btnSelectFolder.setBorderPainted(false);
+        btnSelectFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectFolderActionPerformed(evt);
+            }
+        });
 
         btnAdd.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnAdd.setFont(new java.awt.Font("Tahoma", 1, 11));
@@ -69,12 +102,22 @@ public class Extractor extends javax.swing.JPanel {
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add_Row_32px.png")));
         btnAdd.setBorder(null);
         btnAdd.setBorderPainted(false);
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         txtCodeType.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtCodeType.setText("Code Type: ");
 
         cmCodeType.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cmCodeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pom", "property" }));
+        cmCodeType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmCodeTypeActionPerformed(evt);
+            }
+        });
 
         txtExample.setText("Ex.");
 
@@ -165,10 +208,22 @@ public class Extractor extends javax.swing.JPanel {
 
         listFormat.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         jScrollPane2.setViewportView(listFormat);
+        listFormat.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()){
+                    edtFormat.setText(listFormat.getSelectedValue());
+                }
+            }
+        });
 
         btnGenerate.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Services_32px.png")));
         btnGenerate.setText("Genarate");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Broom_32px.png")));
@@ -180,6 +235,11 @@ public class Extractor extends javax.swing.JPanel {
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Edit_Row_32px.png")));
         btnEdit.setBorder(null);
         btnEdit.setBorderPainted(false);
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnRemove.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnRemove.setFont(new java.awt.Font("Tahoma", 1, 11));
@@ -187,6 +247,11 @@ public class Extractor extends javax.swing.JPanel {
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_Row_32px.png")));
         btnRemove.setBorder(null);
         btnRemove.setBorderPainted(false);
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelExtractorLayout = new javax.swing.GroupLayout(panelExtractor);
         panelExtractor.setLayout(panelExtractorLayout);
@@ -283,6 +348,208 @@ public class Extractor extends javax.swing.JPanel {
     }
 
 
+    private void initLoads(){
+        rbUrl.setSelected(true);
+        getUrls();
+        if(cmCodeType.getSelectedItem().toString().equalsIgnoreCase("pom")){
+            txtAreaExample.setText(Generic.pomEx());
+        } else if(cmCodeType.getSelectedItem().toString().equalsIgnoreCase("property")){
+            txtAreaExample.setText(Generic.propEx());
+        }
+        txtAreaExample.setEditable(false);
+
+    }
+
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {
+        String format=null;
+        ArrayList<String> objList=new ArrayList<String>();
+
+        if(rbPath.isSelected()){
+            format = rbPath.getText().toLowerCase();
+        } else{
+            format = rbUrl.getText().toLowerCase();
+        }
+
+       if(cbLink.isSelected()){
+            objList.add(cbLink.getText());
+        }
+        if(cbButton.isSelected()){
+            objList.add(cbButton.getText());
+        }
+        if(cbCheckBox.isSelected()){
+            objList.add(cbCheckBox.getText());
+        }
+        if(cbEditBox.isSelected()){
+            objList.add(cbEditBox.getText());
+        }
+        if(cbImage.isSelected()){
+            objList.add(cbImage.getText());
+        }
+        if(cbList.isSelected()){
+            objList.add(cbList.getText());
+        }
+        if(cbRadioButton.isSelected()){
+            objList.add(cbRadioButton.getText());
+        }
+        if(cbText.isSelected()){
+            objList.add(cbText.getText());
+        }
+        if(cbComboBox.isSelected()){
+            objList.add(cbComboBox.getText());
+        }
+
+        for(int j=0; j<=objList.size()-1;j++){
+            System.out.println(objList.get(j));
+        }
+
+        DomExtractor domExtractor=new DomExtractor();
+        domExtractor.createAllObjectLocators(format,edtFormat.getText(),cmCodeType.getSelectedItem().toString(),objList);
+    }
+
+    private void cmCodeTypeActionPerformed(java.awt.event.ActionEvent evt) {
+
+        if(cmCodeType.getSelectedItem().toString().equalsIgnoreCase("pom")){
+            txtAreaExample.setText(Generic.pomEx());
+        } else if(cmCodeType.getSelectedItem().toString().equalsIgnoreCase("property")){
+            txtAreaExample.setText(Generic.propEx());
+        }
+
+    }
+    private void rbUrlActionPerformed(java.awt.event.ActionEvent evt) {
+        getUrls();
+    }
+    public void getUrls(){
+        try {
+            listModel.removeAllElements();
+            File file = new File(GlobalConstants.DomExtractor_Extractor_url_file);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String st;
+            while ((st = br.readLine()) != null) {
+
+                listModel.addElement(st);
+            }
+            //listModel.addElement(st);
+
+            listFormat.setModel(listModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void rbPathActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            listModel.removeAllElements();
+
+
+            File file = new File(GlobalConstants.DomExtractor_Extractor_path_file);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String st;
+            while ((st = br.readLine()) != null) {
+
+                listModel.addElement(st);
+            }
+            //listModel.addElement(st);
+
+            listFormat.setModel(listModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {
+
+        if(rbUrl.isSelected()){
+            readText = Generic.readTextFile(GlobalConstants.DomExtractor_Extractor_url_file);
+            if(isElementExistinList(edtFormat.getText())){
+                JOptionPane.showMessageDialog(null, "Already Exists", "Warning" , JOptionPane.WARNING_MESSAGE);
+            } else {
+                Generic.writeText(edtFormat.getText(),GlobalConstants.DomExtractor_Extractor_url_file,true);
+                JOptionPane.showMessageDialog(null, "Done", "Done" , JOptionPane.INFORMATION_MESSAGE);
+                listModel.addElement(edtFormat.getText());
+                listFormat.setModel(listModel);
+            }
+
+        } else if(rbPath.isSelected()){
+            readText = Generic.readTextFile(GlobalConstants.DomExtractor_Extractor_path_file);
+            if(isElementExistinList(edtFormat.getText())){
+                JOptionPane.showMessageDialog(null, "Already Exists", "Warning" , JOptionPane.WARNING_MESSAGE);
+            } else {
+                Generic.writeText(edtFormat.getText(),GlobalConstants.DomExtractor_Extractor_path_file,true);
+                JOptionPane.showMessageDialog(null, "Done", "Done" , JOptionPane.INFORMATION_MESSAGE);
+                listModel.addElement(edtFormat.getText());
+                listFormat.setModel(listModel);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Select Format", "" , JOptionPane.WARNING_MESSAGE);
+        }
+        listFormat.setSelectedValue(edtFormat.getText(),false);
+
+    }
+
+    public boolean isElementExistinList(String addElement){
+        boolean flag=false;
+        System.out.println("readText::"+readText.size());
+        for(int i=0;i<=readText.size()-1;i++){
+            System.out.println(addElement+"::"+readText.get(i).toString());
+            if(addElement.equalsIgnoreCase(readText.get(i).toString())){
+                flag=true;
+                break;
+            }
+        }
+        System.out.println("flag::"+flag);
+        return flag;
+    }
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
+        String edtVal= listFormat.getSelectedValue().toString();
+        listModel.removeElement(listFormat.getSelectedValue());
+        if(rbUrl.isSelected()){
+            Generic.writeText(listFormat.getModel().getElementAt(0).toString(),GlobalConstants.DomExtractor_Extractor_url_file,false);
+            for(int i = 1; i< listFormat.getModel().getSize();i++){
+                Generic.writeText(listFormat.getModel().getElementAt(i).toString(),GlobalConstants.DomExtractor_Extractor_url_file,true);
+            }
+
+            JOptionPane.showMessageDialog(null, "Done", "Done" , JOptionPane.INFORMATION_MESSAGE);
+        } else if(rbPath.isSelected()) {
+            if (listFormat.getModel().getSize() != 0) {
+                Generic.writeText(listFormat.getModel().getElementAt(0).toString(), GlobalConstants.DomExtractor_Extractor_path_file, false);
+                for (int i = 1; i < listFormat.getModel().getSize(); i++) {
+                    Generic.writeText(listFormat.getModel().getElementAt(i).toString(), GlobalConstants.DomExtractor_Extractor_path_file, true);
+                }
+                JOptionPane.showMessageDialog(null, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Select Format", "", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        edtFormat.setText("");
+        edtFormat.setText(edtVal);
+    }
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {
+        listModel.removeElement(listFormat.getSelectedValue());
+        if(rbUrl.isSelected()){
+            Generic.writeText(listFormat.getModel().getElementAt(0).toString(),GlobalConstants.DomExtractor_Extractor_url_file,false);
+            for(int i = 1; i< listFormat.getModel().getSize();i++){
+                Generic.writeText(listFormat.getModel().getElementAt(i).toString(),GlobalConstants.DomExtractor_Extractor_url_file,true);
+            }
+
+            JOptionPane.showMessageDialog(null, "Done", "Done" , JOptionPane.INFORMATION_MESSAGE);
+        } else if(rbPath.isSelected()) {
+            if (listFormat.getModel().getSize() != 0) {
+                Generic.writeText(listFormat.getModel().getElementAt(0).toString(), GlobalConstants.DomExtractor_Extractor_path_file, false);
+                for (int i = 1; i < listFormat.getModel().getSize(); i++) {
+                    Generic.writeText(listFormat.getModel().getElementAt(i).toString(), GlobalConstants.DomExtractor_Extractor_path_file, true);
+                }
+                JOptionPane.showMessageDialog(null, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Select Format", "", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+    private void btnSelectFolderActionPerformed(java.awt.event.ActionEvent evt) {
+        edtFormat.setText(Generic.choosefolderPath());
+    }
     // Variables declaration - do not modify
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClear;

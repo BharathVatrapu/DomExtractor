@@ -1,6 +1,17 @@
 package com.mainProject.frames;
 
+import com.mainProject.utils.DomExtractor;
 import com.mainProject.utils.GlobalConstants;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -8,11 +19,14 @@ import com.mainProject.utils.GlobalConstants;
  */
 public class SmartExtractor extends javax.swing.JPanel {
 
+    public static WebDriver driver;
+
     /**
      * Creates new form Extractor
      */
     public SmartExtractor() {
         initComponents();
+        btnStop.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -48,6 +62,11 @@ public class SmartExtractor extends javax.swing.JPanel {
         btnSelectFolder.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnSelectFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Hand_Left_20px.png")));
         btnSelectFolder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSelectFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectFolderActionPerformed(evt);
+            }
+        });
 
         txtCodeType.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtCodeType.setText("Code Type: ");
@@ -135,6 +154,11 @@ public class SmartExtractor extends javax.swing.JPanel {
         btnGenerate.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Services_32px.png")));
         btnGenerate.setText("Genarate");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Broom_32px.png")));
@@ -153,6 +177,11 @@ public class SmartExtractor extends javax.swing.JPanel {
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Play_32px.png")));
         btnPlay.setText("Play");
         btnPlay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+            }
+        });
 
         txtPastehere.setText("paste here: HTML code");
 
@@ -162,6 +191,11 @@ public class SmartExtractor extends javax.swing.JPanel {
         btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Stop_32px.png")));
         btnStop.setText("Stop");
         btnStop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelExtractorLayout = new javax.swing.GroupLayout(panelExtractor);
         panelExtractor.setLayout(panelExtractorLayout);
@@ -249,12 +283,106 @@ public class SmartExtractor extends javax.swing.JPanel {
         );
     }
 
+    public void btnSelectFolderActionPerformed(java.awt.event.ActionEvent evt){
+        new SelectUrls().setVisible(true);
+        btnSelectFolder.setEnabled(false);
+    }
+    public void btnPlayActionPerformed(java.awt.event.ActionEvent evt){
+        btnPlay.setEnabled(false);
+        btnStop.setEnabled(true);
+        switch (GlobalConstants.SETTINGS_DEFAULT_BROWSER){
+            case "Chrome":
+                System.setProperty(
+                        "webdriver.chrome.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH+ File.separator + "chromedriver.exe");
+                driver = new ChromeDriver();
+                driver.navigate().to(edtFormat.getText());
+                driver.manage().window().maximize();
+//                String openDevTools = Keys.chord(Keys.CONTROL, Keys.SHIFT, "I");
+//                driver.findElement(By.tagName("body")).sendKeys(openDevTools);
+                break;
+            case "Firefox":
+                System.setProperty(
+                        "webdriver.gecko.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator+ "geckodriver.exe");
+                driver = new FirefoxDriver();
+                driver.navigate().to(edtFormat.getText());
+                driver.manage().window().maximize();
+                break;
+            case "IE11":
+                System.setProperty(
+                        "webdriver.ie.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator+ "IEDriverServer.exe");
+                driver = new InternetExplorerDriver();
+                driver.navigate().to(edtFormat.getText());
+                driver.manage().window().maximize();
+                break;
+            case "Edge":
+                System.setProperty(
+                        "webdriver.edge.driver",
+                        GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator+ "MicrosoftWebDriver.exe");
+                driver = new EdgeDriver();
+                driver.navigate().to(edtFormat.getText());
+                driver.manage().window().maximize();
+                break;
+        }
 
+
+    }
+    public void btnStopActionPerformed(java.awt.event.ActionEvent evt){
+
+        driver.quit();
+        btnPlay.setEnabled(true);
+        btnStop.setEnabled(false);
+    }
+
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {
+        String format=null;
+        ArrayList<String> objList=new ArrayList<String>();
+
+//        if(rbPath.isSelected()){
+//            format = rbPath.getText().toLowerCase();
+//        } else{
+//            format = rbUrl.getText().toLowerCase();
+//        }
+
+        if(cbLink.isSelected()){
+            objList.add(cbLink.getText());
+        }
+        if(cbButton.isSelected()){
+            objList.add(cbButton.getText());
+        }
+        if(cbCheckBox.isSelected()){
+            objList.add(cbCheckBox.getText());
+        }
+        if(cbEditBox.isSelected()){
+            objList.add(cbEditBox.getText());
+        }
+        if(cbImage.isSelected()){
+            objList.add(cbImage.getText());
+        }
+        if(cbList.isSelected()){
+            objList.add(cbList.getText());
+        }
+        if(cbRadioButton.isSelected()){
+            objList.add(cbRadioButton.getText());
+        }
+        if(cbText.isSelected()){
+            objList.add(cbText.getText());
+        }
+        if(cbComboBox.isSelected()){
+            objList.add(cbComboBox.getText());
+        }
+
+        for(int j=0; j<=objList.size()-1;j++){
+            System.out.println(objList.get(j));
+        }
+
+        DomExtractor domExtractor=new DomExtractor();
+        domExtractor.createAllObjectLocators(format,txtArea.getText(),cmCodeType.getSelectedItem().toString(),objList);
+    }
     // Variables declaration - do not modify
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnGenerate;
     private javax.swing.JButton btnPlay;
-    private javax.swing.JButton btnSelectFolder;
+    public static javax.swing.JButton btnSelectFolder;
     private javax.swing.JButton btnStop;
     private javax.swing.JCheckBox cbButton;
     private javax.swing.JCheckBox cbCheckBox;
@@ -266,7 +394,7 @@ public class SmartExtractor extends javax.swing.JPanel {
     private javax.swing.JCheckBox cbRadioButton;
     private javax.swing.JCheckBox cbText;
     private javax.swing.JComboBox<String> cmCodeType;
-    private javax.swing.JTextField edtFormat;
+    public static javax.swing.JTextField edtFormat;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea txtArea;
     private javax.swing.JPanel panelExtractor;

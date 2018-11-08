@@ -509,6 +509,7 @@ public class Main extends JFrame {
         about.setVisible(false);
         settings.setVisible(false);
         viewFiles.setVisible(true);
+        viewFiles.initLoad();
 
     }
     private void btnThemeActionPerformed(java.awt.event.ActionEvent evt) {
