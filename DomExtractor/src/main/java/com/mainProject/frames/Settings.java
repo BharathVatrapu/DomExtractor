@@ -3,6 +3,7 @@ package com.mainProject.frames;
 
 import com.mainProject.utils.Generic;
 import com.mainProject.utils.GlobalConstants;
+import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -100,6 +101,7 @@ public class Settings extends javax.swing.JPanel {
 
         rbChrome.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbChrome.setText("Chrome");
+        //rbChrome.createToolTip().setTipText("chromedriver.exe");
 
         imgChrome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Chrome_30px.png")));
 
@@ -107,16 +109,19 @@ public class Settings extends javax.swing.JPanel {
 
         rbFirefox.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbFirefox.setText("Firefox");
+       // rbFirefox.createToolTip().setTipText("geckodriver.exe");
 
         imgIE11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Internet_Explorer_30px.png")));
 
         rbIE11.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbIE11.setText("IE11");
+      //  rbIE11.createToolTip().setTipText("IEDriverServer.exe");
 
         imgEdge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Microsoft_Edge_30px.png")));
 
         rbEdge.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         rbEdge.setText("Edge");
+      //  rbEdge.createToolTip().setTipText("MicrosoftWebDriver.exe");
 
         bgBrowsers.add(rbChrome);
         bgBrowsers.add(rbFirefox);
@@ -220,33 +225,66 @@ public class Settings extends javax.swing.JPanel {
         edtDriverPath.setText(Generic.choosefolderPath());
     }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {
+        sb.delete(0, sb.length());
         boolean flag=true;
+        String browser=getBrowser();
+        String driver=browserDriverName(browser);
          if(edtSelectFolder.getText().isEmpty()){
              flag=false;
              JOptionPane.showMessageDialog(null, "Select Folder Path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
          } else{
+             if(Generic.isFileExist(edtSelectFolder.getText())){
+                 sb.append(edtSelectFolder.getText());
+                 sb.append(System.lineSeparator());
+             } else {
+                 flag=false;
+                 JOptionPane.showMessageDialog(null, edtSelectFolder.getText()+"::folder path not exist", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+             }
 
-             sb.append(edtSelectFolder.getText());
-             sb.append(System.lineSeparator());
          }
         if(edtDriverPath.getText().isEmpty()){
             flag=false;
             JOptionPane.showMessageDialog(null, "Select Drivers folder Path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
         } else{
-            sb.append(edtDriverPath.getText());
-            sb.append(System.lineSeparator());
+             if(Generic.isFileExist(edtDriverPath.getText()+ File.separator+driver)){
+                 sb.append(edtDriverPath.getText());
+                 sb.append(System.lineSeparator());
+             } else{
+                 flag=false;
+                 JOptionPane.showMessageDialog(null, driver+"::Driver not found in folder path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+             }
+
         }
-        sb.append(getBrowser());
+        sb.append(browser);
         String everything = sb.toString();
          if(flag){
              Generic.writeText(everything,GlobalConstants.DomExtractor_Config_Settings_file,false);
              JOptionPane.showMessageDialog(null, "Done", "Info" , JOptionPane.INFORMATION_MESSAGE);
          }
+         Generic.loadDefaultData();
     }
 
+    public String browserDriverName(String browser){
+        String driverName=null;
+        switch(browser){
+            case "Chrome":
+                driverName="chromedriver.exe";
+                break;
+            case "Firefox":
+                driverName="geckodriver.exe";
+                break;
+            case "IE11":
+                driverName="IEDriverServer.exe";
+                break;
+            case "Edge":
+                driverName="MicrosoftWebDriver.exe";
+                break;
+        }
+        return driverName;
+    }
 
     public void initLoad(){
-        if(GlobalConstants.SETTINGS_FOLDER_PATH != null){
+        if(GlobalConstants.SETTINGS_DEFAULT_BROWSER != null){
             edtSelectFolder.setText(GlobalConstants.SETTINGS_FOLDER_PATH);
             edtDriverPath.setText(GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH);
             setBrowser(GlobalConstants.SETTINGS_DEFAULT_BROWSER);

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Generic {
+    public static DefaultListModel listModel= new DefaultListModel();
 
     public static String getDate(){
         String DateNow=null;
@@ -301,5 +302,29 @@ public class Generic {
         int i = f.getName().lastIndexOf('.');
         String name = f.getName().substring(0,i);
         return new File(f.getParent() + "/" + name + newExtension);
+    }
+
+    public static String clearSpecialChars(String string){
+        String str;
+        str = string.replaceAll("\\s+","");
+        str = str.replaceAll("[-'`~!@#$%&()_;:,<>.?/+^|]*", "");
+        return str;
+    }
+
+    public static void loadDefaultData(){
+        listModel = Generic.readTextFile(GlobalConstants.DomExtractor_Config_Settings_file);
+        if(!listModel.isEmpty()) {
+            GlobalConstants.SETTINGS_FOLDER_PATH = listModel.get(0).toString();
+            GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH = listModel.get(1).toString();
+            GlobalConstants.SETTINGS_DEFAULT_BROWSER = listModel.get(2).toString();
+        }
+        if(Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file)==null) {
+            Generic.writeText("NeonBlue",GlobalConstants.DomExtractor_Config_Theme_file,false);
+            GlobalConstants.THEME = Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file);
+        } else{
+            GlobalConstants.THEME = Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file);
+        }
+
+        Generic.getTheme();
     }
 }

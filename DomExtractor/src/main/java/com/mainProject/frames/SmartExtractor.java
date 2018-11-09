@@ -288,40 +288,46 @@ public class SmartExtractor extends javax.swing.JPanel {
         btnSelectFolder.setEnabled(false);
     }
     public void btnPlayActionPerformed(java.awt.event.ActionEvent evt){
-        btnPlay.setEnabled(false);
-        btnStop.setEnabled(true);
-        switch (GlobalConstants.SETTINGS_DEFAULT_BROWSER){
-            case "Chrome":
-                System.setProperty(
-                        "webdriver.chrome.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH+ File.separator + "chromedriver.exe");
-                driver = new ChromeDriver();
-                driver.navigate().to(edtFormat.getText());
-                driver.manage().window().maximize();
-//                String openDevTools = Keys.chord(Keys.CONTROL, Keys.SHIFT, "I");
-//                driver.findElement(By.tagName("body")).sendKeys(openDevTools);
-                break;
-            case "Firefox":
-                System.setProperty(
-                        "webdriver.gecko.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator+ "geckodriver.exe");
-                driver = new FirefoxDriver();
-                driver.navigate().to(edtFormat.getText());
-                driver.manage().window().maximize();
-                break;
-            case "IE11":
-                System.setProperty(
-                        "webdriver.ie.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator+ "IEDriverServer.exe");
-                driver = new InternetExplorerDriver();
-                driver.navigate().to(edtFormat.getText());
-                driver.manage().window().maximize();
-                break;
-            case "Edge":
-                System.setProperty(
-                        "webdriver.edge.driver",
-                        GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator+ "MicrosoftWebDriver.exe");
-                driver = new EdgeDriver();
-                driver.navigate().to(edtFormat.getText());
-                driver.manage().window().maximize();
-                break;
+        try {
+            btnPlay.setEnabled(false);
+            btnStop.setEnabled(true);
+            System.out.println("browser:" + GlobalConstants.SETTINGS_DEFAULT_BROWSER);
+            switch (GlobalConstants.SETTINGS_DEFAULT_BROWSER) {
+                case "Chrome":
+                    System.setProperty(
+                            "webdriver.chrome.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "chromedriver.exe");
+                    driver = new ChromeDriver();
+                    driver.navigate().to(edtFormat.getText());
+                    driver.manage().window().maximize();
+                    Thread.sleep(5000);
+                    String openDevTools = Keys.chord(Keys.CONTROL, Keys.SHIFT, "i");
+                    driver.findElement(By.tagName("body")).sendKeys(openDevTools);
+                    break;
+                case "Firefox":
+                    System.setProperty(
+                            "webdriver.gecko.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "geckodriver.exe");
+                    driver = new FirefoxDriver();
+                    driver.navigate().to(edtFormat.getText());
+                    driver.manage().window().maximize();
+                    break;
+                case "IE11":
+                    System.setProperty(
+                            "webdriver.ie.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "IEDriverServer.exe");
+                    driver = new InternetExplorerDriver();
+                    driver.navigate().to(edtFormat.getText());
+                    driver.manage().window().maximize();
+                    break;
+                case "Edge":
+                    System.setProperty(
+                            "webdriver.edge.driver",
+                            GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "MicrosoftWebDriver.exe");
+                    driver = new EdgeDriver();
+                    driver.navigate().to(edtFormat.getText());
+                    driver.manage().window().maximize();
+                    break;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
 
@@ -376,7 +382,7 @@ public class SmartExtractor extends javax.swing.JPanel {
         }
 
         DomExtractor domExtractor=new DomExtractor();
-        domExtractor.createAllObjectLocators(format,txtArea.getText(),cmCodeType.getSelectedItem().toString(),objList);
+        domExtractor.smartExtractor(txtArea.getText(),cmCodeType.getSelectedItem().toString(),driver,objList);
     }
     // Variables declaration - do not modify
     private javax.swing.JButton btnClear;

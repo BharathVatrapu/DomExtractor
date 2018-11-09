@@ -145,23 +145,24 @@ public class ViewFiles extends javax.swing.JPanel {
     }
     public ViewFilesTableModel getModel(String dirPath) {
         int i=1;
-
-        File file = new File(dirPath);
-        String[] names = file.list();
-        //build the list
-        List<ViewFileTable> viewFileList = new ArrayList<ViewFileTable>();
-        if (names!=null) {
-            for (String name : names) {
-               // if (new File(dirPath + name).isFile()) {
+        if(dirPath!=null) {
+            File file = new File(dirPath);
+            String[] names = file.list();
+            //build the list
+            List<ViewFileTable> viewFileList = new ArrayList<ViewFileTable>();
+            if (names != null) {
+                for (String name : names) {
+                    // if (new File(dirPath + name).isFile()) {
 
                     ViewFileTable viewFileTable = new ViewFileTable(i, name, Generic.getLastModifiedDateTime(dirPath + name));
-                     viewFileList.add(viewFileTable);
-                    i=i+1;
-              //  }
-            }
+                    viewFileList.add(viewFileTable);
+                    i = i + 1;
+                    //  }
+                }
 
+            }
+            viewFilesTableModel = new ViewFilesTableModel(viewFileList);
         }
-        viewFilesTableModel = new ViewFilesTableModel(viewFileList);
         return viewFilesTableModel;
     }
     private void btnOpenActionPerformed(java.awt.event.ActionEvent evt)throws Exception {

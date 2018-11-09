@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public class Main extends JFrame {
 
-    DefaultListModel listModel= new DefaultListModel();
+
     GridBagLayout gridBagLayout = new GridBagLayout();
 
     static Home home;
@@ -34,7 +34,7 @@ public class Main extends JFrame {
 
 
     public Main() {
-        loadDefaultData();
+        Generic.loadDefaultData();
         initComponents();
         home = new Home();
         extractor = new Extractor();
@@ -605,7 +605,7 @@ public class Main extends JFrame {
 
 
     public void initLoading(){
-        if(GlobalConstants.SETTINGS_FOLDER_PATH==null){
+        if(GlobalConstants.SETTINGS_DEFAULT_BROWSER==null){
             btnSettings();
         } else {
             home();
@@ -616,22 +616,7 @@ public class Main extends JFrame {
         dispose();
     }
 
-    public void loadDefaultData(){
-        listModel = Generic.readTextFile(GlobalConstants.DomExtractor_Config_Settings_file);
-        if(!listModel.isEmpty()) {
-            GlobalConstants.SETTINGS_FOLDER_PATH = listModel.get(0).toString();
-            GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH = listModel.get(1).toString();
-            GlobalConstants.SETTINGS_DEFAULT_BROWSER = listModel.get(2).toString();
-        }
-        if(Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file)==null) {
-            Generic.writeText("NeonBlue",GlobalConstants.DomExtractor_Config_Theme_file,false);
-            GlobalConstants.THEME = Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file);
-        } else{
-            GlobalConstants.THEME = Generic.readText(GlobalConstants.DomExtractor_Config_Theme_file);
-        }
 
-        Generic.getTheme();
-    }
 
     // Variables declaration - do not modify
     private JButton btnAbout;

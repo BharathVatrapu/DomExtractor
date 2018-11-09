@@ -14,6 +14,7 @@ public class GlobalConstants {
     public static String DomExtractor_Extractor_url_file = DomExtractor_Extractor_folder+File.separator+"url.txt";
     public static String DomExtractor_Extractor_path_file = DomExtractor_Extractor_folder+File.separator+"path.txt";
 
+    public static String DomExtractor_Files_folder = DomExtractor_Home_folder+File.separator+"Files";
 
 
 
@@ -21,20 +22,20 @@ public class GlobalConstants {
 //    public static int header_Color_g= 204;
 //    public static int header_Color_b= 255;
 
-    public static int header_Color_r= 67;
-    public static int header_Color_g= 119;
-    public static int header_Color_b= 202;
+    public static int header_Color_r= 255;
+    public static int header_Color_g= 255;
+    public static int header_Color_b= 255;
 
     public static int side_Color_r= 55;
     public static int side_Color_g= 55;
 //    public static int side_Color_b= 102;
     public static int side_Color_b= 55;
 
-    public static int body_Color_r=119;
-    public static int body_Color_g= 166;
-    public static int body_Color_b= 254;
+    public static int body_Color_r=240;
+    public static int body_Color_g= 240;
+    public static int body_Color_b= 240;
 
-    public static int Vintage_1950s[] = {128, 173, 215,10, 189, 160};
+    public static int Default[] = {255, 255, 255,240, 240, 240};
     public static int SLATE_BLUE[] = {102, 102, 204,133, 133, 214};
     public static int BitterSweet[] = {255, 92, 92,255, 125, 125};
     public static int Supernova[] = {255, 173, 51,255, 189, 92};
@@ -47,12 +48,12 @@ public class GlobalConstants {
 
 
 
-    public static String SETTINGS_FOLDER_PATH=null;
+    public static String SETTINGS_FOLDER_PATH=DomExtractor_Files_folder;
     public static String SETTINGS_DRIVER_FOLDER_PATH=null;
     public static String SETTINGS_DEFAULT_BROWSER=null;
     public static String THEME=null;
 
-    public static String DEFAULT_THEME="NeonBlue";
+    public static String DEFAULT_THEME="Default";
 
     public static String Versio_Product = "DomExtractor 2.0";
     public static String Version_Java=System.getProperty("java.version")+"_"+System.getProperty("java.vm.version");

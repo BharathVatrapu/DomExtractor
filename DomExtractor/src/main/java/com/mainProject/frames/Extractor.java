@@ -490,7 +490,7 @@ public class Extractor extends javax.swing.JPanel {
 
     public boolean isElementExistinList(String addElement){
         boolean flag=false;
-        System.out.println("readText::"+readText.size());
+
         for(int i=0;i<=readText.size()-1;i++){
             System.out.println(addElement+"::"+readText.get(i).toString());
             if(addElement.equalsIgnoreCase(readText.get(i).toString())){
@@ -498,7 +498,7 @@ public class Extractor extends javax.swing.JPanel {
                 break;
             }
         }
-        System.out.println("flag::"+flag);
+
         return flag;
     }
 

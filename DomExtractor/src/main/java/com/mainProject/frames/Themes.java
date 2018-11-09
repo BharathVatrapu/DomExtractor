@@ -50,7 +50,7 @@ public class Themes extends javax.swing.JPanel {
         txtTheme.setFont(new java.awt.Font("Tahoma", 3, 14));
         txtTheme.setText("Theme: ");
 
-        cbSelectTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NeonBlue","SlateBlue", "BitterSweet", "Supernova", "LaserLemon","MintGreen","PersianGreen","FuchiaPink" }));
+        cbSelectTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Default", "NeonBlue","SlateBlue", "BitterSweet", "Supernova", "LaserLemon","MintGreen","PersianGreen","FuchiaPink" }));
 
         panelBody.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Body", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -191,6 +191,10 @@ public class Themes extends javax.swing.JPanel {
     public void setColors(String Theme){
         switch (Theme){
 
+            case "Default":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.Default[0],GlobalConstants.Default[1],GlobalConstants.Default[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.Default[3],GlobalConstants.Default[4],GlobalConstants.Default[5]));
+                break;
             case "SlateBlue":
                 btnHeaderColor.setBackground(new Color(GlobalConstants.SLATE_BLUE[0],GlobalConstants.SLATE_BLUE[1],GlobalConstants.SLATE_BLUE[2]));
                 btnBodyColor.setBackground(new Color(GlobalConstants.SLATE_BLUE[3],GlobalConstants.SLATE_BLUE[4],GlobalConstants.SLATE_BLUE[5]));

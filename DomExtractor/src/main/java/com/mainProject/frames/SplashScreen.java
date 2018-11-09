@@ -84,6 +84,9 @@ public class SplashScreen extends JFrame {
         if(!Generic.createFolder(GlobalConstants.DomExtractor_Extractor_folder)){
             flag=false;
         }
+        if(!Generic.createFolder(GlobalConstants.DomExtractor_Files_folder)){
+            flag=false;
+        }
 
         if(!Generic.createFile(GlobalConstants.DomExtractor_Config_Settings_file)){
             flag=false;
