@@ -40,7 +40,7 @@ public class About extends javax.swing.JPanel {
                 panelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-
+        lbImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about.gif")));
         txtAreaSystemDetails.setColumns(20);
         txtAreaSystemDetails.setRows(5);
         txtAreaSystemDetails.setText("Product Version: "+GlobalConstants.Versio_Product+"\nUser Name: "+GlobalConstants.user_name+"\nJava: "+GlobalConstants.Version_Java+"\nRuntime: "+GlobalConstants.Version_JavaRuntime+"\nSystem: "+GlobalConstants.Version_OS+"");

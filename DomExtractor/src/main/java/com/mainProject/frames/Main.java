@@ -5,6 +5,8 @@ import com.mainProject.utils.Generic;
 import com.mainProject.utils.GlobalConstants;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -153,7 +155,7 @@ public class Main extends JFrame {
 
         imgHtml.setIcon(new ImageIcon(getClass().getResource("/icons/HTML_Filetype_48px.png")));
 
-        imgConvert.setIcon(new ImageIcon(getClass().getResource("/icons/Outgoing_Data_48px.png")));
+        imgConvert.setIcon(new ImageIcon(getClass().getResource("/icons/Outgoing_Data.gif")));
 
         imgTXT.setIcon(new ImageIcon(getClass().getResource("/icons/Code_File_48px.png")));
 
@@ -226,9 +228,20 @@ public class Main extends JFrame {
         btnSettings.setBorder(null);
         btnSettings.setBorderPainted(false);
         btnSettings.setFocusPainted(false);
-        btnSettings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnSettingsActionPerformed(evt);
+//            }
+//        });
+        btnSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSettingsActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSettings.setIcon(new ImageIcon(getClass().getResource("/coloricons/Settings_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSettings.setIcon(new ImageIcon(getClass().getResource("/icons/Settings_26px.png")));
             }
         });
 
@@ -240,11 +253,18 @@ public class Main extends JFrame {
         btnHome.setBorder(null);
         btnHome.setBorderPainted(false);
         btnHome.setFocusPainted(false);
-        btnHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHomeActionPerformed(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnHome.setIcon(new ImageIcon(getClass().getResource("/coloricons/Home_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnHome.setIcon(new ImageIcon(getClass().getResource("/icons/Home_26px.png")));
+            }
         });
+
 
         btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnExtractor.setFont(new Font("Segoe UI", 1, 12));
@@ -254,9 +274,20 @@ public class Main extends JFrame {
         btnExtractor.setBorder(null);
         btnExtractor.setBorderPainted(false);
         btnExtractor.setFocusPainted(false);
-        btnExtractor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnExtractor.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnExtractorActionPerformed(evt);
+//            }
+//        });
+        btnExtractor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExtractorActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExtractor.setIcon(new ImageIcon(getClass().getResource("/coloricons/Property_Script_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExtractor.setIcon(new ImageIcon(getClass().getResource("/icons/Property_Script_26px.png")));
             }
         });
 
@@ -268,9 +299,20 @@ public class Main extends JFrame {
         btnTheme.setBorder(null);
         btnTheme.setBorderPainted(false);
         btnTheme.setFocusPainted(false);
-        btnTheme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnTheme.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnThemeActionPerformed(evt);
+//            }
+//        });
+        btnTheme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnThemeActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTheme.setIcon(new ImageIcon(getClass().getResource("/coloricons/Paint_Palette_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTheme.setIcon(new ImageIcon(getClass().getResource("/icons/Paint_Palette_26px.png")));
             }
         });
 
@@ -282,9 +324,20 @@ public class Main extends JFrame {
         btnHelp.setBorder(null);
         btnHelp.setBorderPainted(false);
         btnHelp.setFocusPainted(false);
-        btnHelp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnHelpActionPerformed(evt);
+//            }
+//        });
+        btnHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHelpActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnHelp.setIcon(new ImageIcon(getClass().getResource("/coloricons/Help_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnHelp.setIcon(new ImageIcon(getClass().getResource("/icons/Help_26px.png")));
             }
         });
 
@@ -296,9 +349,20 @@ public class Main extends JFrame {
         btnSideClose.setBorder(null);
         btnSideClose.setBorderPainted(false);
         btnSideClose.setFocusPainted(false);
-        btnSideClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnSideClose.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnSideCloseActionPerformed(evt);
+//            }
+//        });
+        btnSideClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSideCloseActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSideClose.setIcon(new ImageIcon(getClass().getResource("/coloricons/Shutdown_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSideClose.setIcon(new ImageIcon(getClass().getResource("/icons/Shutdown_26px.png")));
             }
         });
 
@@ -310,9 +374,20 @@ public class Main extends JFrame {
         btnSmartExtrator.setBorder(null);
         btnSmartExtrator.setBorderPainted(false);
         btnSmartExtrator.setFocusPainted(false);
-        btnSmartExtrator.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnSmartExtrator.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnSmartExtratorActionPerformed(evt);
+//            }
+//        });
+        btnSmartExtrator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSmartExtratorActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSmartExtrator.setIcon(new ImageIcon(getClass().getResource("/coloricons/Pin_Pad_20px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSmartExtrator.setIcon(new ImageIcon(getClass().getResource("/icons/Pin_Pad_20px.png")));
             }
         });
 
@@ -324,9 +399,20 @@ public class Main extends JFrame {
         btnOpenFile.setBorder(null);
         btnOpenFile.setBorderPainted(false);
         btnOpenFile.setFocusPainted(false);
-        btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnOpenFileActionPerformed(evt);
+//            }
+//        });
+        btnOpenFile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnOpenFileActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnOpenFile.setIcon(new ImageIcon(getClass().getResource("/icons/Open_View_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnOpenFile.setIcon(new ImageIcon(getClass().getResource("/icons/Open_View_26px.png")));
             }
         });
 
@@ -338,9 +424,20 @@ public class Main extends JFrame {
         btnAbout.setBorder(null);
         btnAbout.setBorderPainted(false);
         btnAbout.setFocusPainted(false);
-        btnAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnAboutActionPerformed(evt);
+//            }
+//        });
+        btnAbout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAboutActionPerformed(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAbout.setIcon(new ImageIcon(getClass().getResource("/coloricons/About_26px.png")));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAbout.setIcon(new ImageIcon(getClass().getResource("/icons/About_26px.png")));
             }
         });
 
@@ -421,11 +518,11 @@ public class Main extends JFrame {
     private void btnClosesActionPerformed(java.awt.event.ActionEvent evt) {
         close();
     }
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnHomeActionPerformed(java.awt.event.MouseEvent evt) {
        home();
     }
     public void home(){
-        btnHome.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        btnHome.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnExtractor.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -445,8 +542,8 @@ public class Main extends JFrame {
         settings.setVisible(false);
         home.setVisible(true);
     }
-    private void btnExtractorActionPerformed(java.awt.event.ActionEvent evt) {
-        btnExtractor.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+    private void btnExtractorActionPerformed(java.awt.event.MouseEvent evt) {
+        btnExtractor.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -467,8 +564,8 @@ public class Main extends JFrame {
         extractor.setVisible(true);
 
     }
-    private void btnSmartExtratorActionPerformed(java.awt.event.ActionEvent evt) {
-        btnSmartExtrator.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+    private void btnSmartExtratorActionPerformed(java.awt.event.MouseEvent evt) {
+        btnSmartExtrator.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -489,8 +586,8 @@ public class Main extends JFrame {
         smartExtractor.setVisible(true);
 
     }
-    private void btnOpenFileActionPerformed(java.awt.event.ActionEvent evt) {
-        btnOpenFile.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+    private void btnOpenFileActionPerformed(java.awt.event.MouseEvent evt) {
+        btnOpenFile.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -512,8 +609,8 @@ public class Main extends JFrame {
         viewFiles.initLoad();
 
     }
-    private void btnThemeActionPerformed(java.awt.event.ActionEvent evt) {
-        btnTheme.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+    private void btnThemeActionPerformed(java.awt.event.MouseEvent evt) {
+        btnTheme.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -534,13 +631,13 @@ public class Main extends JFrame {
         themes.setVisible(true);
 
     }
-    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSettingsActionPerformed(java.awt.event.MouseEvent evt) {
 
         btnSettings();
     }
 
     public void btnSettings(){
-        btnSettings.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        btnSettings.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -561,8 +658,8 @@ public class Main extends JFrame {
         settings.setVisible(true);
     }
 
-    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {
-        btnAbout.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+    private void btnAboutActionPerformed(java.awt.event.MouseEvent evt) {
+        btnAbout.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -583,7 +680,8 @@ public class Main extends JFrame {
         about.setVisible(true);
 
     }
-    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnHelpActionPerformed(java.awt.event.MouseEvent evt) {
+        btnHelp.setBackground(new Color(GlobalConstants.button_Color_r,GlobalConstants.button_Color_g,GlobalConstants.button_Color_b));
         panelBody.setBackground(new Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
 
         btnHome.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
@@ -595,10 +693,16 @@ public class Main extends JFrame {
         btnHelp.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
         btnClose.setBackground(new Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
-
+        home.setVisible(false);
+        extractor.setVisible(false);
+        smartExtractor.setVisible(false);
+        viewFiles.setVisible(false);
+        themes.setVisible(false);
+        settings.setVisible(false);
+        about.setVisible(false);
         new Help().setVisible(true);
     }
-    private void btnSideCloseActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSideCloseActionPerformed(java.awt.event.MouseEvent evt) {
         close();
 
     }

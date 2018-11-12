@@ -403,7 +403,7 @@ public class Extractor extends javax.swing.JPanel {
         }
 
         DomExtractor domExtractor=new DomExtractor();
-        domExtractor.createAllObjectLocators(format,edtFormat.getText(),cmCodeType.getSelectedItem().toString(),objList);
+        domExtractor.extractor(format,edtFormat.getText(),cmCodeType.getSelectedItem().toString(),objList);
     }
 
     private void cmCodeTypeActionPerformed(java.awt.event.ActionEvent evt) {

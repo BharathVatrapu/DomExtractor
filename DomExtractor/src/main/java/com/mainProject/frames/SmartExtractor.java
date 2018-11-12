@@ -2,6 +2,7 @@ package com.mainProject.frames;
 
 import com.mainProject.utils.DomExtractor;
 import com.mainProject.utils.GlobalConstants;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -63,8 +65,12 @@ public class SmartExtractor extends javax.swing.JPanel {
         btnSelectFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Hand_Left_20px.png")));
         btnSelectFolder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSelectFolder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelectFolderActionPerformed(evt);
+            public void actionPerformed(java.awt.event.ActionEvent evt)  {
+                try {
+                    btnSelectFolderActionPerformed(evt);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -84,6 +90,7 @@ public class SmartExtractor extends javax.swing.JPanel {
 
         cbList.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbList.setText("List");
+        cbList.setEnabled(false);
 
         cbEditBox.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         cbEditBox.setText("Edit Box");
@@ -283,48 +290,58 @@ public class SmartExtractor extends javax.swing.JPanel {
         );
     }
 
-    public void btnSelectFolderActionPerformed(java.awt.event.ActionEvent evt){
+    public void btnSelectFolderActionPerformed(java.awt.event.ActionEvent evt) throws Exception{
         new SelectUrls().setVisible(true);
         btnSelectFolder.setEnabled(false);
     }
     public void btnPlayActionPerformed(java.awt.event.ActionEvent evt){
+        System.out.println("driverpath:"+GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH);
+        System.out.println("url:"+edtFormat.getText());
         try {
-            btnPlay.setEnabled(false);
-            btnStop.setEnabled(true);
-            System.out.println("browser:" + GlobalConstants.SETTINGS_DEFAULT_BROWSER);
-            switch (GlobalConstants.SETTINGS_DEFAULT_BROWSER) {
-                case "Chrome":
-                    System.setProperty(
-                            "webdriver.chrome.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "chromedriver.exe");
-                    driver = new ChromeDriver();
-                    driver.navigate().to(edtFormat.getText());
-                    driver.manage().window().maximize();
-                    Thread.sleep(5000);
-                    String openDevTools = Keys.chord(Keys.CONTROL, Keys.SHIFT, "i");
-                    driver.findElement(By.tagName("body")).sendKeys(openDevTools);
-                    break;
-                case "Firefox":
-                    System.setProperty(
-                            "webdriver.gecko.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "geckodriver.exe");
-                    driver = new FirefoxDriver();
-                    driver.navigate().to(edtFormat.getText());
-                    driver.manage().window().maximize();
-                    break;
-                case "IE11":
-                    System.setProperty(
-                            "webdriver.ie.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "IEDriverServer.exe");
-                    driver = new InternetExplorerDriver();
-                    driver.navigate().to(edtFormat.getText());
-                    driver.manage().window().maximize();
-                    break;
-                case "Edge":
-                    System.setProperty(
-                            "webdriver.edge.driver",
-                            GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "MicrosoftWebDriver.exe");
-                    driver = new EdgeDriver();
-                    driver.navigate().to(edtFormat.getText());
-                    driver.manage().window().maximize();
-                    break;
+            if(GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH!="null") {
+                if(!StringUtils.isEmpty(edtFormat.getText())) {
+                    btnPlay.setEnabled(false);
+                    btnStop.setEnabled(true);
+                    System.out.println("browser:" + GlobalConstants.SETTINGS_DEFAULT_BROWSER);
+                    switch (GlobalConstants.SETTINGS_DEFAULT_BROWSER) {
+                        case "Chrome":
+                            System.setProperty(
+                                    "webdriver.chrome.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "chromedriver.exe");
+                            driver = new ChromeDriver();
+                            driver.navigate().to(edtFormat.getText());
+                            driver.manage().window().maximize();
+                            Thread.sleep(5000);
+                            String openDevTools = Keys.chord(Keys.CONTROL, Keys.SHIFT, "i");
+                            driver.findElement(By.tagName("body")).sendKeys(openDevTools);
+                            break;
+                        case "Firefox":
+                            System.setProperty(
+                                    "webdriver.gecko.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "geckodriver.exe");
+                            driver = new FirefoxDriver();
+                            driver.navigate().to(edtFormat.getText());
+                            driver.manage().window().maximize();
+                            break;
+                        case "IE11":
+                            System.setProperty(
+                                    "webdriver.ie.driver", GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "IEDriverServer.exe");
+                            driver = new InternetExplorerDriver();
+                            driver.navigate().to(edtFormat.getText());
+                            driver.manage().window().maximize();
+                            break;
+                        case "Edge":
+                            System.setProperty(
+                                    "webdriver.edge.driver",
+                                    GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH + File.separator + "MicrosoftWebDriver.exe");
+                            driver = new EdgeDriver();
+                            driver.navigate().to(edtFormat.getText());
+                            driver.manage().window().maximize();
+                            break;
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(null, "Enter Url..", "Info" , JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else{
+                JOptionPane.showMessageDialog(null, "Setup the Drivers path in Settings tab", "Info" , JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e){
             e.printStackTrace();

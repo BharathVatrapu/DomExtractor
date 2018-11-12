@@ -50,7 +50,7 @@ public class Themes extends javax.swing.JPanel {
         txtTheme.setFont(new java.awt.Font("Tahoma", 3, 14));
         txtTheme.setText("Theme: ");
 
-        cbSelectTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Default", "NeonBlue","SlateBlue", "BitterSweet", "Supernova", "LaserLemon","MintGreen","PersianGreen","FuchiaPink" }));
+        cbSelectTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Default1","Default2","Default2", "NeonBlue","SlateBlue", "BitterSweet", "Supernova", "LaserLemon","MintGreen","PersianGreen","FuchiaPink" }));
 
         panelBody.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Body", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -97,6 +97,8 @@ public class Themes extends javax.swing.JPanel {
                 btnDefaultActionPerformed(evt);
             }
         });
+
+        imgSide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Theme_242_297.gif")));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -191,9 +193,18 @@ public class Themes extends javax.swing.JPanel {
     public void setColors(String Theme){
         switch (Theme){
 
-            case "Default":
-                btnHeaderColor.setBackground(new Color(GlobalConstants.Default[0],GlobalConstants.Default[1],GlobalConstants.Default[2]));
-                btnBodyColor.setBackground(new Color(GlobalConstants.Default[3],GlobalConstants.Default[4],GlobalConstants.Default[5]));
+            case "Default1":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.Default1[0],GlobalConstants.Default1[1],GlobalConstants.Default1[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.Default1[3],GlobalConstants.Default1[4],GlobalConstants.Default1[5]));
+                break;
+
+            case "Default2":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.Default2[0],GlobalConstants.Default2[1],GlobalConstants.Default2[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.Default2[3],GlobalConstants.Default2[4],GlobalConstants.Default2[5]));
+                break;
+            case "Default3":
+                btnHeaderColor.setBackground(new Color(GlobalConstants.Default3[0],GlobalConstants.Default3[1],GlobalConstants.Default3[2]));
+                btnBodyColor.setBackground(new Color(GlobalConstants.Default3[3],GlobalConstants.Default3[4],GlobalConstants.Default3[5]));
                 break;
             case "SlateBlue":
                 btnHeaderColor.setBackground(new Color(GlobalConstants.SLATE_BLUE[0],GlobalConstants.SLATE_BLUE[1],GlobalConstants.SLATE_BLUE[2]));

@@ -204,8 +204,6 @@ public class Generic {
 
     public static void getTheme(){
 
-
-
         switch (GlobalConstants.THEME){
             case "NeonBlue":
                 GlobalConstants.header_Color_r= GlobalConstants.NeonBlue[0];
@@ -216,7 +214,7 @@ public class Generic {
                 GlobalConstants.body_Color_g= GlobalConstants.NeonBlue[4];
                 GlobalConstants.body_Color_b= GlobalConstants.NeonBlue[5];
                 break;
-            case "SLATE_BLUE":
+            case "SlateBlue":
                 GlobalConstants.header_Color_r= GlobalConstants.SLATE_BLUE[0];
                 GlobalConstants.header_Color_g= GlobalConstants.SLATE_BLUE[1];
                 GlobalConstants.header_Color_b= GlobalConstants.SLATE_BLUE[2];
@@ -280,6 +278,56 @@ public class Generic {
                 GlobalConstants.body_Color_b= GlobalConstants.FuchiaPink[5];
                 break;
 
+            case "Default":
+                GlobalConstants.header_Color_r= GlobalConstants.Default[0];
+                GlobalConstants.header_Color_g= GlobalConstants.Default[1];
+                GlobalConstants.header_Color_b= GlobalConstants.Default[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.Default[3];
+                GlobalConstants.body_Color_g= GlobalConstants.Default[4];
+                GlobalConstants.body_Color_b= GlobalConstants.Default[5];
+                break;
+            case "Default1":
+                GlobalConstants.header_Color_r= GlobalConstants.Default1[0];
+                GlobalConstants.header_Color_g= GlobalConstants.Default1[1];
+                GlobalConstants.header_Color_b= GlobalConstants.Default1[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.Default1[3];
+                GlobalConstants.body_Color_g= GlobalConstants.Default1[4];
+                GlobalConstants.body_Color_b= GlobalConstants.Default1[5];
+
+                GlobalConstants.button_Color_r=GlobalConstants.Default1[6];
+                GlobalConstants.button_Color_g= GlobalConstants.Default1[7];
+                GlobalConstants.button_Color_b= GlobalConstants.Default1[8];
+                break;
+
+            case "Default2":
+                GlobalConstants.header_Color_r= GlobalConstants.Default2[0];
+                GlobalConstants.header_Color_g= GlobalConstants.Default2[1];
+                GlobalConstants.header_Color_b= GlobalConstants.Default2[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.Default2[3];
+                GlobalConstants.body_Color_g= GlobalConstants.Default2[4];
+                GlobalConstants.body_Color_b= GlobalConstants.Default2[5];
+
+                GlobalConstants.button_Color_r=GlobalConstants.Default2[6];
+                GlobalConstants.button_Color_g= GlobalConstants.Default2[7];
+                GlobalConstants.button_Color_b= GlobalConstants.Default2[8];
+                break;
+            case "Default3":
+                GlobalConstants.header_Color_r= GlobalConstants.Default3[0];
+                GlobalConstants.header_Color_g= GlobalConstants.Default3[1];
+                GlobalConstants.header_Color_b= GlobalConstants.Default3[2];
+
+                GlobalConstants.body_Color_r=GlobalConstants.Default3[3];
+                GlobalConstants.body_Color_g= GlobalConstants.Default3[4];
+                GlobalConstants.body_Color_b= GlobalConstants.Default3[5];
+
+                GlobalConstants.button_Color_r=GlobalConstants.Default3[6];
+                GlobalConstants.button_Color_g= GlobalConstants.Default3[7];
+                GlobalConstants.button_Color_b= GlobalConstants.Default3[8];
+                break;
+
         }
 
     }
@@ -304,7 +352,7 @@ public class Generic {
         return new File(f.getParent() + "/" + name + newExtension);
     }
 
-    public static String clearSpecialChars(String string){
+    public static String removeSpecialChars(String string){
         String str;
         str = string.replaceAll("\\s+","");
         str = str.replaceAll("[-'`~!@#$%&()_;:,<>.?/+^|]*", "");

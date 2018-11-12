@@ -49,6 +49,7 @@ public class Settings extends javax.swing.JPanel {
         panelExtractor.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
         panelExtractor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
 
+
         javax.swing.GroupLayout panelImageLayout = new javax.swing.GroupLayout(panelImage);
         panelImage.setLayout(panelImageLayout);
         panelImageLayout.setHorizontalGroup(
@@ -60,6 +61,7 @@ public class Settings extends javax.swing.JPanel {
                         .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
 
+        lbImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/settings.gif")));
         txtFolderPath.setFont(new java.awt.Font("Tahoma", 1, 12));
         txtFolderPath.setText("Set Folder Path:");
 
@@ -243,8 +245,15 @@ public class Settings extends javax.swing.JPanel {
 
          }
         if(edtDriverPath.getText().isEmpty()){
-            flag=false;
-            JOptionPane.showMessageDialog(null, "Select Drivers folder Path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Drivers path not selected", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+            if(Generic.isFileExist(edtDriverPath.getText()+ File.separator+driver)){
+                sb.append("null");
+                sb.append(System.lineSeparator());
+            } else{
+                flag=false;
+                JOptionPane.showMessageDialog(null, driver+"::Driver not found in folder path", "Warning.. " , JOptionPane.INFORMATION_MESSAGE);
+            }
         } else{
              if(Generic.isFileExist(edtDriverPath.getText()+ File.separator+driver)){
                  sb.append(edtDriverPath.getText());
@@ -286,7 +295,9 @@ public class Settings extends javax.swing.JPanel {
     public void initLoad(){
         if(GlobalConstants.SETTINGS_DEFAULT_BROWSER != null){
             edtSelectFolder.setText(GlobalConstants.SETTINGS_FOLDER_PATH);
-            edtDriverPath.setText(GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH);
+            if(GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH!=null) {
+                edtDriverPath.setText(GlobalConstants.SETTINGS_DRIVER_FOLDER_PATH);
+            }
             setBrowser(GlobalConstants.SETTINGS_DEFAULT_BROWSER);
         } else {
             setBrowser("Chrome");

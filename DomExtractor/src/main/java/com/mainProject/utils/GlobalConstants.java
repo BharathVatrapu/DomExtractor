@@ -35,7 +35,16 @@ public class GlobalConstants {
     public static int body_Color_g= 240;
     public static int body_Color_b= 240;
 
+    public static int button_Color_r=240;
+    public static int button_Color_g= 240;
+    public static int button_Color_b= 240;
+
     public static int Default[] = {255, 255, 255,240, 240, 240};
+    public static int Default1[] = {180,180,180,195,195,195,28,135,219};
+    public static int Default2[] = {180,180,180,195,195,195,134,50,179};
+    public static int Default3[] = {180,180,180,195,195,195,44,48,180};
+
+
     public static int SLATE_BLUE[] = {102, 102, 204,133, 133, 214};
     public static int BitterSweet[] = {255, 92, 92,255, 125, 125};
     public static int Supernova[] = {255, 173, 51,255, 189, 92};

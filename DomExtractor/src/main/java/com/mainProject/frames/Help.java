@@ -2,6 +2,11 @@ package com.mainProject.frames;
 
 import com.mainProject.utils.GlobalConstants;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -38,10 +43,14 @@ import javax.swing.*;
             //setLocationRelativeTo(null);
             setUndecorated(true);
 
-        panelHelp.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
+        panelHelp.setBackground(new java.awt.Color(GlobalConstants.side_Color_r,GlobalConstants.side_Color_g,GlobalConstants.side_Color_b));
 
         imgUserguideWord.setIcon(new ImageIcon(getClass().getResource("/icons/Microsoft_Word_100px.png")));
-
+                imgUserguideWord.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                                imgUserguideWordActionPerformed();
+                        }
+                });
         txtUserGuide.setText("Dom Extractor User Guide");
 
         btnMinimize.setBackground(new java.awt.Color(GlobalConstants.body_Color_r,GlobalConstants.body_Color_g,GlobalConstants.body_Color_b));
@@ -55,6 +64,11 @@ import javax.swing.*;
         btnClose.setBorder(null);
         btnClose.setBorderPainted(false);
         btnClose.setFocusPainted(false);
+                btnClose.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnClosesActionPerformed(evt);
+                        }
+                });
 
         GroupLayout panelHelpLayout = new GroupLayout(panelHelp);
         panelHelp.setLayout(panelHelpLayout);
@@ -102,7 +116,24 @@ import javax.swing.*;
             setLocationRelativeTo(null);
             setVisible(true);
         }
+        private void btnClosesActionPerformed(java.awt.event.ActionEvent evt) {
+                setVisible(false);
+                dispose();
 
+        }
+        public void imgUserguideWordActionPerformed(){
+                openHelpDoc();
+        }
+        public void openHelpDoc(){
+                File file = new File(System.getProperty("user.dir")+File.separator+"src"+File.separator+"main"+File.separator+"resources"+File.separator+"doc"+File.separator+"help.docx");
+                try {
+                        if (Desktop.isDesktopSupported()) {
+                                Desktop.getDesktop().open(file);
+                        }
+                } catch (IOException ioe) {
+                        ioe.printStackTrace();
+                }
+        }
         /**
          * @param args the command line arguments
          */
